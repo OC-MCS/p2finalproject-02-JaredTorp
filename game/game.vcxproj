@@ -152,9 +152,16 @@
     <Text Include="Readme.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bomb.h" />
+    <ClInclude Include="BombList.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyList.h" />
     <ClInclude Include="GameSettings.h" />
     <ClInclude Include="GameUI.h" />
+    <ClInclude Include="Missile.h" />
+    <ClInclude Include="MissileList.h" />
     <ClInclude Include="Ship.h" />
+    <ClInclude Include="THE ORIGINAL.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

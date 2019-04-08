@@ -31,7 +31,28 @@
     <ClInclude Include="GameSettings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="THE ORIGINAL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Ship.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BombList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Missile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MissileList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

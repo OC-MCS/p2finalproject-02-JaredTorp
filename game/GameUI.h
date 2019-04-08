@@ -26,6 +26,7 @@ public:
 		
 		//set the game started equal to false, because we don't start the game right off the bat
 		isGameStarted = false;
+
 	}
 
 	//to draw the start button
@@ -43,6 +44,8 @@ public:
 		Text ScreenText("Jared Torp's ''Amazing'' Game", font, 50);
 		ScreenText.setPosition(100, 100);
 		win.draw(ScreenText); //draw the string
+
+		
 
 
 
@@ -65,6 +68,7 @@ public:
 			//get rid of the screen
 			//run the game
 			isGameStarted = true;
+			
 		}
 	}
 
@@ -83,7 +87,7 @@ public:
 		exit(-1);
 	}
 
-	bool getGameStarted() const
+	bool getGameStarted()
 	{
 		return isGameStarted;
 	}

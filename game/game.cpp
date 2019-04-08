@@ -8,6 +8,7 @@
 using namespace std;
 #include <SFML/Graphics.hpp>
 #include "GameUI.h"
+#include "Ship.h"
 using namespace sf; 
 
 //============================================================
@@ -35,6 +36,24 @@ int main()
 
 	//creating the GameUI object 
 	GameUI GameUI;
+	Ship Ship(window);
+
+	//should this be in a class?
+	Texture starsTexture;
+	if (!starsTexture.loadFromFile("stars.jpg"))
+	{
+		cout << "Unable to load stars texture!" << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	// A sprite is a thing we can draw and manipulate on the screen.
+	// We have to give it a "texture" to specify what it looks like
+
+	Sprite background;
+	background.setTexture(starsTexture);
+	// The texture file is 640x480, so scale it up a little to cover 800x600 window
+	background.setScale(1.5, 1.5);
+	
 
 	while (window.isOpen())
 	{
@@ -51,17 +70,23 @@ int main()
 				Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
 				GameUI.handleMouseUp(mousePos);
 			}
+		
+		
 		}
 
-		if (GameUI.getGameStarted() == false)
+		if (!GameUI.getGameStarted())
 		{
+			window.draw(background);
 			GameUI.draw(window);
+			
 		}
 		else
 		{
-			//game starts
+			//texture for the stars background
+			window.draw(background);
+			Ship.draw(window);
+			Ship.moveShip();
 		}
-
 		// end the current frame; this makes everything that we have 
 		// already "drawn" actually show up on the screen
 		window.display();
