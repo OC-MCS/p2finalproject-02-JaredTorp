@@ -19,7 +19,7 @@ public:
 	Ship(RenderWindow& window)
 	{
 		
-		if (!shipTexture.loadFromFile("ship.png"))
+		if (!shipTexture.loadFromFile("NewShip.bmp"))
 		{
 			cout << "Unable to load ship texture!" << endl;
 			exit(EXIT_FAILURE);

@@ -163,6 +163,9 @@
     <ClInclude Include="Ship.h" />
     <ClInclude Include="THE ORIGINAL.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="NewShip.bmp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
