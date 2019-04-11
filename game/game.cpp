@@ -102,7 +102,8 @@ int main()
 			//if (enemy.getEnemyBounds().intersects(Ship.getShipBounds()))
 			//	{
 			//		GameSettings.LoseLife();
-			//		//should we check our lives in here? the game over function?
+			//		should we check the lives here? for the game over function?
+			//      restart the game
 			//	}
 
 		
