@@ -12,6 +12,7 @@ class Enemy
 private:
 	Sprite enemy;
 	Texture enemyTexture;
+	Vector2f position;
 
 public:
 	
@@ -29,9 +30,14 @@ public:
 		
 		/*enemy.setPosition(400, 0);*/
 
+	}
 
 
-
+	//overloaded constructor that accepts an int for the "name" of the enemy and its position
+	Enemy(Vector2f pos)
+	{
+	
+		position = pos;
 	}
 
 
@@ -39,10 +45,10 @@ public:
 
 	//testing the draw function for the enemy, we will be using this in the  
 
-	/*void draw(RenderWindow& win)
+	void draw(RenderWindow& win)
 	{
 		win.draw(enemy);
-	}*/
+	}
 
 
 	//Delete this later, I just want to see if the png works

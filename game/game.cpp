@@ -11,6 +11,8 @@ using namespace std;
 #include "GameUI.h"
 #include "Ship.h"
 #include "GameSettings.h"
+#include <list>
+#include "EnemyList.h"
 
 using namespace sf; 
 
@@ -41,6 +43,7 @@ int main()
 	GameUI GameUI;
 	Ship Ship(window);//creates the ship object and passes the window
 	GameSettings GameSettings;
+	EnemyList EnemyList;
 	
 
 
@@ -95,6 +98,8 @@ int main()
 			GameUI.drawGame(window, GameSettings); //draw the lives counter and the enemies
 			Ship.draw(window);
 			Ship.moveShip();
+
+			EnemyList.DrawEnemies(window);
 
 			
 			//LEFT OFF HERE
