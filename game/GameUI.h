@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "GameSettings.h"
+
 using namespace std;
 using namespace sf;
 
@@ -10,6 +12,7 @@ private:
 RectangleShape StartBtn;
 Vector2f StartPos; //is manually setting the button bad?
 bool isGameStarted;
+
 
 public:
 	GameUI()
@@ -29,8 +32,8 @@ public:
 
 	}
 
-	//to draw the start button
-	void draw(RenderWindow& win)
+	//to draw the start button once the game starts we use the next draw function
+	void drawStart(RenderWindow& win)
 	{
 		//draw the start button
 		//load the font
@@ -48,8 +51,6 @@ public:
 		
 
 
-
-
 		//text for the Start button
 		Text StartText("START", font, 70);
 		StartText.setPosition(StartPos.x, StartPos.y);
@@ -60,6 +61,35 @@ public:
 
 	}
 
+	void drawGame(RenderWindow& win, GameSettings& obj)
+	{
+		
+		//draw the lives counter
+		//load the font
+		Font font;
+		if (!font.loadFromFile("C:\\Windows\\Fonts\\arial.ttf"))
+		{
+			die("couldn't load font");
+		}
+
+		//text for the Start button
+		Text Lives("Lives: " + to_string(obj.getLives())  , font, 25);
+		Lives.setPosition(5, 3); //want to position it in the top left corner
+		win.draw(Lives); //draw the string
+
+
+		Text Enemies("Aliens Killed: " + to_string(obj.getKilled()), font, 25);
+		Enemies.setPosition(575, 3);
+		win.draw(Enemies);
+
+	}
+
+
+
+	
+	
+	
+	//handles pressing the start button
 	void handleMouseUp(Vector2f mouse)
 	{
 		if (StartBtn.getGlobalBounds().contains(mouse)) //mouse is a Vector2f

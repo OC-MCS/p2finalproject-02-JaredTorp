@@ -4,11 +4,14 @@
 // The code below is the original code for our first graphics
 // project (moving the little green ship). 
 //========================================================
+
 #include <iostream>
 using namespace std;
 #include <SFML/Graphics.hpp>
 #include "GameUI.h"
 #include "Ship.h"
+#include "GameSettings.h"
+
 using namespace sf; 
 
 //============================================================
@@ -36,9 +39,13 @@ int main()
 
 	//creating the GameUI object 
 	GameUI GameUI;
-	Ship Ship(window);
+	Ship Ship(window);//creates the ship object and passes the window
+	GameSettings GameSettings;
+	
 
-	//should this be in a class?
+
+
+	//should this be in a class?????????????
 	Texture starsTexture;
 	if (!starsTexture.loadFromFile("stars.jpg"))
 	{
@@ -77,15 +84,30 @@ int main()
 		if (!GameUI.getGameStarted())
 		{
 			window.draw(background);
-			GameUI.draw(window);
+			GameUI.drawStart(window);
 			
 		}
 		else
 		{
 			//texture for the stars background
 			window.draw(background);
+
+			GameUI.drawGame(window, GameSettings); //draw the lives counter and the enemies
 			Ship.draw(window);
 			Ship.moveShip();
+
+			
+			//LEFT OFF HERE
+
+			//if (enemy.getEnemyBounds().intersects(Ship.getShipBounds()))
+			//	{
+			//		GameSettings.LoseLife();
+			//		//should we check our lives in here? the game over function?
+			//	}
+
+		
+		
+		
 		}
 		// end the current frame; this makes everything that we have 
 		// already "drawn" actually show up on the screen

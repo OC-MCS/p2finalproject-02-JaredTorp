@@ -24,13 +24,14 @@ public:
 			cout << "Unable to load ship texture!" << endl;
 			exit(EXIT_FAILURE);
 		}
-	ship.setTexture(shipTexture);
+		//texture the ship
+		ship.setTexture(shipTexture);
 
 	// initial position of the ship will be approx middle of screen
 	shipX = window.getSize().x / 2.0f;
 	shipY = window.getSize().y / 1.1f;
 	ship.setPosition(shipX, shipY);
-	//texture the ship
+	
 	
 
 	
@@ -38,11 +39,12 @@ public:
 	}
 	
 	//function to draw the ship
+	//should we move this to gameUI?
 	void draw(RenderWindow& win)
 	{
-		
 		win.draw(ship);
 	}
+
 
 	//function to move the ship based on player input
 	void moveShip()
@@ -74,6 +76,11 @@ public:
 		
 	}
 
+	//this is a function that returns the bounds of the ship
+	FloatRect getShipBounds()
+	{
+		return ship.getGlobalBounds();
+	}
 	
 	
 };
