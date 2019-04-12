@@ -90,7 +90,7 @@ int main()
 			GameUI.drawStart(window);
 			
 		}
-		else
+		else //if later, we do this for the lives counter
 		{
 			//texture for the stars background
 			window.draw(background);
@@ -99,8 +99,21 @@ int main()
 			Ship.draw(window);
 			Ship.moveShip();
 
+			EnemyList.moveEnemies();
+
+			//we need to check to see if any of the enemies passes the Y value
+			/*if (EnemyList.CheckYBounds)
+			{
+				GameSettings.getKilled()
+			}*/
+
 			EnemyList.DrawEnemies(window);
 
+
+		}
+			
+			
+			
 			
 			//LEFT OFF HERE
 
@@ -114,7 +127,7 @@ int main()
 		
 		
 		
-		}
+		
 		// end the current frame; this makes everything that we have 
 		// already "drawn" actually show up on the screen
 		window.display();

@@ -11,37 +11,26 @@ class Enemy
 {
 private:
 	Sprite enemy;
-	Texture enemyTexture;
-	Vector2f position;
+	
+	
 
 public:
 	
-	Enemy()
-	{
-		if (!enemyTexture.loadFromFile("Alien.png"))
-		{
-			cout << "Unable to load enemy texture!" << endl;
-			exit(EXIT_FAILURE);
-		}
-		//set the texture of the enemy
-		enemy.setTexture(enemyTexture);
-		//
-		
-		
-		/*enemy.setPosition(400, 0);*/
-
-	}
 
 
 	//overloaded constructor that accepts an int for the "name" of the enemy and its position
-	Enemy(Vector2f pos)
+	Enemy(Vector2f pos, Texture& enemyTexture)
 	{
-	
-		position = pos;
+
+		
+		//set the texture of the enemy
+		enemy.setTexture(enemyTexture);
+
+		enemy.setPosition(pos);
 	}
 
 
-
+	
 
 	//testing the draw function for the enemy, we will be using this in the  
 
@@ -51,17 +40,19 @@ public:
 	}
 
 
-	//Delete this later, I just want to see if the png works
-	//void EnemyMove()
-	//{
-	//	const float SPEED = 1.0f;
-	//			
-	//		
-	//	enemy.move(0, SPEED);
-	//		
-	//	
-	//}
+	//funtion to set the speed of the nemy
+	void EnemyMove()
+	{
+		const float SPEED = 1.0f;
+				
+			
+		enemy.move(0, SPEED);
+			
+		
+	}
 
+
+	
 
 
 
