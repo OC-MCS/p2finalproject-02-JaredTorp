@@ -39,6 +39,7 @@ int main()
 	// Limit the framerate to 60 frames per second
 	window.setFramerateLimit(60);
 
+
 	//creating the GameUI object 
 	GameUI GameUI;
 	Ship Ship(window);//creates the ship object and passes the window
@@ -78,7 +79,7 @@ int main()
 			{
 				//check to see if the Start button was pressed
 				Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
-				GameUI.handleMouseUp(mousePos);
+				GameUI.handleMouseUp(mousePos); //checks the position of the moust to click the start
 			}
 		
 		
@@ -86,11 +87,13 @@ int main()
 
 		if (!GameUI.getGameStarted())
 		{
+
 			window.draw(background);
 			GameUI.drawStart(window);
-			
+
+
 		}
-		else //if later, we do this for the lives counter
+		else if (GameSettings.getLives() > 0 && GameUI.getGameStarted()) // we want to keep in this if function until lives = 0
 		{
 			//texture for the stars background
 			window.draw(background);
@@ -105,11 +108,13 @@ int main()
 			/*if (EnemyList.CheckYBounds)
 			{
 				GameSettings.getKilled()
+				restart the 
 			}*/
 
 			EnemyList.DrawEnemies(window);
 
-
+		
+			
 		}
 			
 			
