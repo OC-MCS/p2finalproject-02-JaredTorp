@@ -130,8 +130,10 @@ int main()
 			//	}
 
 		
+
+		//check the missile in flight with the global bounds of the background texture
 		
-		
+
 		
 		// end the current frame; this makes everything that we have 
 		// already "drawn" actually show up on the screen
