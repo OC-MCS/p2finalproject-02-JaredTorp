@@ -23,31 +23,20 @@ public:
 			exit(EXIT_FAILURE);
 		}
 
+			const int offset = 75;
+			int xPosition = 47;
 
+			for (int i = 0; i < 10; i++)
+			{
+				Vector2f position(xPosition, 35);
 
-		const int offset = 75;
-		int xPosition = 30;
+				Enemy enemy(position, enemyTexture);
 
-		for (int  i= 0; i < 10; i++)
-		{
-		Vector2f position(xPosition,35);
+				List.push_back(enemy);
 
-		Enemy enemy(position, enemyTexture);
+				xPosition += offset;
 
-		List.push_back(enemy);
-		
-		xPosition += offset;
-		
-		}
-
-
-		
-
-
-
-
-
-
+			}
 
 	}
 
@@ -90,11 +79,44 @@ public:
 	}
 
 
-	// CheckListPosition()
-	//{
+	//this function helps us check the positions of the enemies, we want to back out once we know an enemy is too low
+	 bool enemyTooLow()
+	{
+		 bool tooLow = false;
+		 
+		 list<Enemy>::iterator iter;
+		 for (iter = List.begin(); iter != List.end() && !tooLow; iter++) //we want to back out of this loop when we know the position is too low 
+		 {
+			 if ((*iter).getEnemyPosition().y > 545)
+			 {
+				 tooLow = true;
+			 }
+			 
 
+		 }
 
-	//}
+		 return tooLow;
+
+	}
+
+	 void resetEnemyPositions()
+	 {
+		 list<Enemy>::iterator iter;
+		 const int offset = 75;
+		 int xPosition = 47;
+
+		 for (iter = List.begin(); iter != List.end(); iter++) //we want to back out of this loop when we know the position is too low 
+		 {
+				 Vector2f position(xPosition, 35);
+
+				 (*iter).setEnemyPosition(position);
+
+				 xPosition += offset;
+
+		 }
+	
+
+	 }
 
 
 };

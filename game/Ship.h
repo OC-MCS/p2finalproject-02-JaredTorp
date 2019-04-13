@@ -27,10 +27,10 @@ public:
 		//texture the ship
 		ship.setTexture(shipTexture);
 
-	// initial position of the ship will be approx middle of screen
-	shipX = window.getSize().x / 2.0f;
-	shipY = window.getSize().y / 1.1f;
-	ship.setPosition(shipX, shipY);
+		// initial position of the ship will be approx middle of screen
+		shipX = window.getSize().x / 2.0f;
+		shipY = window.getSize().y / 1.1f;
+		ship.setPosition(shipX, shipY);
 	
 	
 

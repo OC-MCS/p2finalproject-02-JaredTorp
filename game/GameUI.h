@@ -117,8 +117,14 @@ public:
 		exit(-1);
 	}
 
+	//to check if the game has started
 	bool getGameStarted()
 	{
 		return isGameStarted;
+	}
+
+	void setGameStarted(bool x)
+	{
+		isGameStarted = x;
 	}
 };

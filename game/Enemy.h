@@ -51,7 +51,16 @@ public:
 		
 	}
 
+	Vector2f getEnemyPosition()
+	{
+		return enemy.getPosition();
+	}
 
+	//to reset the enemies when there is a life lost
+	void setEnemyPosition(Vector2f pos)
+	{
+		enemy.setPosition(pos);
+	}
 
 	
 

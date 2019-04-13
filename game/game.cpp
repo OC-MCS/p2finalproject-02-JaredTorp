@@ -69,6 +69,7 @@ int main()
 	while (window.isOpen())
 	{
 		
+		
 		Event event;
 		while (window.pollEvent(event))
 		{
@@ -85,6 +86,7 @@ int main()
 		
 		}
 
+		//the game hasnt started
 		if (!GameUI.getGameStarted())
 		{
 
@@ -93,8 +95,12 @@ int main()
 
 
 		}
-		else if (GameSettings.getLives() > 0 && GameUI.getGameStarted()) // we want to keep in this if function until lives = 0
+
+		//the game starts
+		else if (GameSettings.getLives() != 0 && GameUI.getGameStarted()) // we want to keep in this if function until lives = 0
 		{
+			
+
 			//texture for the stars background
 			window.draw(background);
 
@@ -103,15 +109,21 @@ int main()
 			Ship.moveShip();
 
 			EnemyList.moveEnemies();
-
-			//we need to check to see if any of the enemies passes the Y value
-			/*if (EnemyList.CheckYBounds)
-			{
-				GameSettings.getKilled()
-				restart the 
-			}*/
-
 			EnemyList.DrawEnemies(window);
+			
+			
+			//we need to check to see if any of the enemies passes the Y value
+			if (EnemyList.enemyTooLow() == true)
+			{
+				cout << "The enemies are too low!" << endl;
+				GameSettings.LoseLife(); //need to lose a life
+				EnemyList.resetEnemyPositions(); //need to reset the enemies positions back to the top
+				
+				/*GameUI.setGameStarted(false); */ //keep this here, do we restart?
+
+			}
+
+			
 
 		
 			
