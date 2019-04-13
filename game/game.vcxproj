@@ -161,7 +161,7 @@
     <ClInclude Include="Missile.h" />
     <ClInclude Include="MissileList.h" />
     <ClInclude Include="Ship.h" />
-    <ClInclude Include="THE ORIGINAL.h" />
+    <ClInclude Include="Lab05 original code.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="NewShip.bmp" />

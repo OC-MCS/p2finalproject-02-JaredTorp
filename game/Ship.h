@@ -82,5 +82,10 @@ public:
 		return ship.getGlobalBounds();
 	}
 	
+	//need to get the position of the ship for the missile
+	Vector2f getShipPosition()
+	{
+		return ship.getPosition();
+	}
 	
 };

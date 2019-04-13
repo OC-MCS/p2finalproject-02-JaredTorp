@@ -87,7 +87,7 @@ public:
 		 list<Enemy>::iterator iter;
 		 for (iter = List.begin(); iter != List.end() && !tooLow; iter++) //we want to back out of this loop when we know the position is too low 
 		 {
-			 if ((*iter).getEnemyPosition().y > 545)
+			 if ((*iter).getEnemyPosition().y > 510) //roughly the position that the enemy will hit the player
 			 {
 				 tooLow = true;
 			 }
