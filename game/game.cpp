@@ -68,7 +68,7 @@ int main()
 	// The texture file is 640x480, so scale it up a little to cover 800x600 window
 	background.setScale(1.5, 1.5);
 
-	bool missileShot = false; //to keep track of the misiles when the space is pressed
+	bool spacePressed = false; //to keep track of the misiles when the space is pressed
 
 
 	//ANIMATION LOOP
@@ -91,15 +91,14 @@ int main()
 
 
 
-			if (event.type == Event::KeyPressed)
+			else if (event.type == Event::KeyPressed)
 			{
 				if (event.key.code == Keyboard::Space)
 				{
 					
-					//missile.setMissilePosition(Ship.getShipPosition());
-					MissileList.addMissile();
-					MissileList.setMissilePosition(Ship.getShipPosition()); //get the position of the ship, then set that position to that
-					missileShot = true;
+					
+					MissileList.addMissile(Ship.getShipPosition());
+					spacePressed = true;
 
 				}
 
@@ -156,10 +155,10 @@ int main()
 				/*EnemyList.CheckDeleteEnemy(missile, GameSettings);
 */
 				//if the missile fired
-				if (missileShot)
+				if (spacePressed)
 				{
 				
-					MissileList.drawMissiles(window, missileShot);  //draw the missiles, pass the window and the bool
+					MissileList.drawMissiles(window);  //draw the missiles, pass the window and the bool
 				
 				}
 				

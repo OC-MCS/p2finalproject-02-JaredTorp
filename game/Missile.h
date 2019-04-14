@@ -11,17 +11,15 @@ class Missile
 {
 private: 
 	Sprite missile;
-	 
 	
-//Vector2f missilePosition; //this may be stupid
 
 public:
 
-	Missile(Texture& missileTexture)
+	Missile(Texture& missileTexture, Vector2f pos)
 	{
 	
 		missile.setTexture(missileTexture); 
-
+		missile.setPosition(pos);
 		
 
 
@@ -49,21 +47,12 @@ public:
 	}*/
 
 
-	void draw(RenderWindow& win, bool& flag)
+	void draw(RenderWindow& win)
 	{
-		 
-
-
-		if (missile.getPosition().y > 0)
-		{
-			missile.move(0, -10);
-			win.draw(missile);
-		}
-		else
-		{
-			flag = false;
-			
-		}
+		missile.move(0, -10);
+		win.draw(missile);
+		
+		
 		
 	}
 

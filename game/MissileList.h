@@ -25,7 +25,7 @@ public:
 	}
 	/////////////////////////////////////////////////////
 
-	void addMissile()
+	void addMissile(Vector2f ShipPos)
 	{
 
 		if (!missileTexture.loadFromFile("missile.png"))
@@ -35,19 +35,20 @@ public:
 		}
 
 
-		Missile tempMissile(missileTexture);
+		Missile tempMissile(missileTexture, ShipPos);
+
 		List.push_back(tempMissile);
 
 		 
 	}
 
 
-	void drawMissiles(RenderWindow& win, bool& flag)
+	void drawMissiles(RenderWindow& win)
 	{
 		list<Missile>::iterator iter;
 		for (iter = List.begin(); iter != List.end(); iter++)
 		{
-			(*iter).draw(win, flag);
+			(*iter).draw(win);
 
 		}
 	}
