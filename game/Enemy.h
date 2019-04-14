@@ -71,9 +71,5 @@ public:
 	{
 		return enemy.getPosition().x;
 	}
-	
-
-
-
 
 };
