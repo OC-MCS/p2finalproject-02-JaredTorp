@@ -74,11 +74,13 @@ public:
 
 		//text for the Start button
 		Text Lives("Lives: " + to_string(obj.getLives())  , font, 25);
+		Lives.setFillColor(Color::Red);
 		Lives.setPosition(5, 3); //want to position it in the top left corner
 		win.draw(Lives); //draw the string
 
 
 		Text Enemies("Aliens Killed: " + to_string(obj.getKilled()), font, 25);
+		Enemies.setFillColor(Color::Red);
 		Enemies.setPosition(575, 3);
 		win.draw(Enemies);
 

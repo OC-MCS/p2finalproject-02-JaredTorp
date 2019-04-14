@@ -21,8 +21,6 @@ public:
 	//overloaded constructor that accepts an int for the "name" of the enemy and its position
 	Enemy(Vector2f pos, Texture& enemyTexture)
 	{
-
-		
 		//set the texture of the enemy
 		enemy.setTexture(enemyTexture);
 
@@ -62,6 +60,17 @@ public:
 		enemy.setPosition(pos);
 	}
 
+
+	FloatRect getEnemyBounds()
+	{
+		return enemy.getGlobalBounds();
+	}
+
+	//this function helps us get the x position of the current enemy
+	int getEnemyXPosition()
+	{
+		return enemy.getPosition().x;
+	}
 	
 
 

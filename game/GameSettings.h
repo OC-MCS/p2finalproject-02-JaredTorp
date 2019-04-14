@@ -8,6 +8,7 @@ private:
 	int lives; //we keep track the amount of lives that the player has
 	int enemiesKilled; //we keep track of the number of enemies killed
 
+	//handle and know the levels (do this AFTER level one is done)
 
 public:
 	//constructor
@@ -45,6 +46,11 @@ public:
 		lives--;
 	}
 
+	//this will increment the enemies killed
+	void EnemyKilled()
+	{
+		enemiesKilled++;
+	}
 
 
 

@@ -11,19 +11,15 @@ class Missile
 {
 private: 
 	Sprite missile;
-	Texture missileTexture; //dont keep in here
+	 
 	
 //Vector2f missilePosition; //this may be stupid
 
 public:
 
-	Missile()
+	Missile(Texture& missileTexture)
 	{
-		if (!missileTexture.loadFromFile("missile.png"))
-		{
-			cout << "Unable to load missile texture!" << endl;
-			exit(EXIT_FAILURE);
-		}
+	
 		missile.setTexture(missileTexture); 
 
 		
@@ -71,7 +67,10 @@ public:
 		
 	}
 
-
+	FloatRect getMissileBounds()
+	{
+		return missile.getGlobalBounds();
+	}
 
 
 

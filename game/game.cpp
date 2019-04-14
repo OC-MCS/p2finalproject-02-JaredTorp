@@ -13,7 +13,7 @@ using namespace std;
 #include "GameSettings.h"
 #include <list>
 #include "EnemyList.h"
-#include "Missile.h" 
+#include "MissileList.h" 
 
 
 using namespace sf; 
@@ -47,7 +47,7 @@ int main()
 	Ship Ship(window);//creates the ship object and passes the window
 	GameSettings GameSettings;
 	EnemyList EnemyList;
-	Missile missile;
+	MissileList MissileList;
 
 
 	///////////////////////////////////////////
@@ -68,7 +68,7 @@ int main()
 	// The texture file is 640x480, so scale it up a little to cover 800x600 window
 	background.setScale(1.5, 1.5);
 
-	bool missileShot = false;
+	bool missileShot = false; //to keep track of the misiles when the space is pressed
 
 
 	//ANIMATION LOOP
@@ -95,9 +95,10 @@ int main()
 			{
 				if (event.key.code == Keyboard::Space)
 				{
-					//LEFT OFF HERE
-					cout << "Dummy SPacebAr" << endl;
-					missile.setMissilePosition(Ship.getShipPosition()); //get the position of the ship, tehn set that position to that
+					
+					//missile.setMissilePosition(Ship.getShipPosition());
+					MissileList.addMissile();
+					MissileList.setMissilePosition(Ship.getShipPosition()); //get the position of the ship, then set that position to that
 					missileShot = true;
 
 				}
@@ -145,12 +146,20 @@ int main()
 
 				}
 
+
+				//check to see if the missiles hit the enemy
+				//pass the missile list and the Gamesetting to keep track of enemies killed
+				
+
+
+				//COME BACK TO THIS WITH THE MISSILE LIST
+				/*EnemyList.CheckDeleteEnemy(missile, GameSettings);
+*/
 				//if the missile fired
 				if (missileShot)
 				{
-					
 				
-				missile.draw(window, missileShot); //draw the missile, pass the window and the bool
+					MissileList.drawMissiles(window, missileShot);  //draw the missiles, pass the window and the bool
 				
 				}
 				
@@ -160,22 +169,6 @@ int main()
 
 
 			}
-
-
-
-
-			//LEFT OFF HERE
-
-			//if (enemy.getEnemyBounds().intersects(Ship.getShipBounds()))
-			//	{
-			//		GameSettings.LoseLife();
-			//		should we check the lives here? for the game over function?
-			//      restart the game
-			//	}
-
-
-
-		//check the missile in flight with the global bounds of the background texture
 
 
 

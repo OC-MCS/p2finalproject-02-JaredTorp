@@ -2,6 +2,7 @@
 
 #include "Enemy.h"
 #include <list>
+#include "Missile.h"
 
 //this class is for a list of enemies
 //this is the container class for the list of enemies
@@ -43,7 +44,34 @@ public:
 
 
 	//if enemy hit funtion/delete function
+	void CheckDeleteEnemy(Missile& missile, GameSettings& GameSettings)
+	{
+		list<Enemy>::iterator iter;
+		for (iter = List.begin(); iter != List.end();)
+		{
+			if ((*iter).getEnemyBounds().intersects(missile.getMissileBounds()))
+			{
+				iter = List.erase(iter); //delete JUST THE ALIEN BECAUSE WE ARE TESTING
+				GameSettings.EnemyKilled(); //an enemy is killed
+			}
+			else
+			{
+			iter++;
+			}
+			
+			
 
+		}
+
+
+	}
+
+	
+	
+	
+	
+	
+	
 	//position function should be in main?
 
 
@@ -102,16 +130,15 @@ public:
 	 void resetEnemyPositions()
 	 {
 		 list<Enemy>::iterator iter;
-		 const int offset = 75;
-		 int xPosition = 47;
+		
 
 		 for (iter = List.begin(); iter != List.end(); iter++) //we want to back out of this loop when we know the position is too low 
 		 {
-				 Vector2f position(xPosition, 35);
+				 Vector2f position((*iter).getEnemyXPosition(), 35);
 
 				 (*iter).setEnemyPosition(position);
 
-				 xPosition += offset;
+				 
 
 		 }
 	
