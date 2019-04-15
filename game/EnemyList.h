@@ -47,7 +47,7 @@ public:
 	//if enemy hit funtion/delete function
 	//COME BACK LATER
 	//list<Missile> missiles, GameSettings& GameSettings
-	void CheckDeleteEnemy(list<Missile> missiles, GameSettings& GameSettings)
+	void CheckDeleteEnemy(MissileList& missiles, GameSettings& GameSettings)
 	{
 		list<Enemy>::iterator EnemyIter;
 		list<Missile>::iterator MissileIter;
@@ -55,13 +55,13 @@ public:
 		for (EnemyIter = ListOfEnemies.begin(); EnemyIter != ListOfEnemies.end();)
 		{
 			//cout << "here01" << endl;
-			for (MissileIter = missiles.begin(); MissileIter != missiles.end();)
+			for (MissileIter = missiles.getListOfMissiles().begin(); MissileIter != missiles.getListOfMissiles().end();)
 			{
 				//cout << "here02" << endl;
-				if (EnemyIter->getEnemyBounds().intersects(MissileIter->getMissileBounds()))
+				if ((*EnemyIter).getEnemyBounds().intersects((*MissileIter).getMissileBounds()))
 				{
 					EnemyIter = ListOfEnemies.erase(EnemyIter); //delete alien these are fine
-					MissileIter = missiles.erase(MissileIter); // these are fine
+					MissileIter = missiles.getListOfMissiles().erase(MissileIter); // these are fine
 					GameSettings.EnemyKilled(); //an enemy is killed
 				}
 				else
