@@ -10,20 +10,11 @@ class MissileList
 {
 private:
 	
-	list <Missile>List;
+	list <Missile>ListOfMissiles;
 	Texture missileTexture; //pass this by reference to use only one texture
 
 public:
-	/////////////////////////////////////////////////////
-	//will we have a constructor for missileList???
-	MissileList()
-	{
-	
 
-
-
-	}
-	/////////////////////////////////////////////////////
 
 	void addMissile(Vector2f ShipPos)
 	{
@@ -37,7 +28,7 @@ public:
 
 		Missile tempMissile(missileTexture, ShipPos);
 
-		List.push_back(tempMissile);
+		ListOfMissiles.push_back(tempMissile);
 
 		 
 	}
@@ -46,24 +37,39 @@ public:
 	void drawMissiles(RenderWindow& win)
 	{
 		list<Missile>::iterator iter;
-		for (iter = List.begin(); iter != List.end(); iter++)
+		for (iter = ListOfMissiles.begin(); iter != ListOfMissiles.end(); iter++)
 		{
 			(*iter).draw(win);
 
 		}
 	}
 
-	void setMissilePosition(Vector2f pos)
+	
+
+	void CheckIfOffscreen()
 	{
+
 		list<Missile>::iterator iter;
-		for (iter = List.begin(); iter != List.end(); iter++)
+		for (iter = ListOfMissiles.begin(); iter != ListOfMissiles.end(); )
 		{
-			(*iter).setMissilePosition(pos);
+			if ( (*iter).getMissileYPos() < 0) //checks the y position
+			{
+				iter = ListOfMissiles.erase(iter); //delete the missile when it goes offscreen
+				cout << ListOfMissiles.size() << endl;
+			}
+			else
+			{
+				iter++;
+			}
 
 		}
+
 	}
 
-
+	list<Missile> getListOfMissiles() 
+	{
+		return ListOfMissiles;
+	}
 
 
 

@@ -2,7 +2,8 @@
 
 #include "Enemy.h"
 #include <list>
-#include "Missile.h"
+#include "missile.h"
+#include "missileList.h"
 
 //this class is for a list of enemies
 //this is the container class for the list of enemies
@@ -10,7 +11,7 @@
 class EnemyList
 {
 private:
-	list <Enemy>List;
+	list <Enemy>ListOfEnemies;
 	Texture enemyTexture;
 
 
@@ -33,7 +34,7 @@ public:
 
 				Enemy enemy(position, enemyTexture);
 
-				List.push_back(enemy);
+				ListOfEnemies.push_back(enemy);
 
 				xPosition += offset;
 
@@ -44,23 +45,34 @@ public:
 
 
 	//if enemy hit funtion/delete function
-	void CheckDeleteEnemy(Missile& missile, GameSettings& GameSettings)
+	//COME BACK LATER
+	//list<Missile> missiles, GameSettings& GameSettings
+	void CheckDeleteEnemy(list<Missile> missiles, GameSettings& GameSettings)
 	{
-		list<Enemy>::iterator iter;
-		for (iter = List.begin(); iter != List.end();)
+		list<Enemy>::iterator EnemyIter;
+		list<Missile>::iterator MissileIter;
+	
+		for (EnemyIter = ListOfEnemies.begin(); EnemyIter != ListOfEnemies.end();)
 		{
-			if ((*iter).getEnemyBounds().intersects(missile.getMissileBounds()))
+			//cout << "here01" << endl;
+			for (MissileIter = missiles.begin(); MissileIter != missiles.end();)
 			{
-				iter = List.erase(iter); //delete JUST THE ALIEN BECAUSE WE ARE TESTING
-				GameSettings.EnemyKilled(); //an enemy is killed
-			}
-			else
-			{
-			iter++;
+				//cout << "here02" << endl;
+				if (EnemyIter->getEnemyBounds().intersects(MissileIter->getMissileBounds()))
+				{
+					EnemyIter = ListOfEnemies.erase(EnemyIter); //delete alien these are fine
+					MissileIter = missiles.erase(MissileIter); // these are fine
+					GameSettings.EnemyKilled(); //an enemy is killed
+				}
+				else
+				{
+					
+					EnemyIter++;
+					MissileIter++;
+				}
+				
 			}
 			
-			
-
 		}
 
 
@@ -81,7 +93,7 @@ public:
 	{
 		/*cout << List.size() << endl;*/
 		list<Enemy>::iterator iter;
-		for (iter = List.begin(); iter != List.end(); iter++)
+		for (iter = ListOfEnemies.begin(); iter != ListOfEnemies.end(); iter++)
 		{
 			(*iter).draw(win);
 			
@@ -97,7 +109,7 @@ public:
 	void moveEnemies()
 	{
 		list<Enemy>::iterator iter;
-		for (iter = List.begin(); iter != List.end(); iter++)
+		for (iter = ListOfEnemies.begin(); iter != ListOfEnemies.end(); iter++)
 		{
 			(*iter).EnemyMove();
 
@@ -113,7 +125,7 @@ public:
 		 bool tooLow = false;
 		 
 		 list<Enemy>::iterator iter;
-		 for (iter = List.begin(); iter != List.end() && !tooLow; iter++) //we want to back out of this loop when we know the position is too low 
+		 for (iter = ListOfEnemies.begin(); iter != ListOfEnemies.end() && !tooLow; iter++) //we want to back out of this loop when we know the position is too low 
 		 {
 			 if ((*iter).getEnemyPosition().y > 510) //roughly the position that the enemy will hit the player
 			 {
@@ -127,12 +139,14 @@ public:
 
 	}
 
+
+	 //this function reserts the enemies
 	 void resetEnemyPositions()
 	 {
 		 list<Enemy>::iterator iter;
 		
 
-		 for (iter = List.begin(); iter != List.end(); iter++) //we want to back out of this loop when we know the position is too low 
+		 for (iter = ListOfEnemies.begin(); iter != ListOfEnemies.end(); iter++) //we want to back out of this loop when we know the position is too low 
 		 {
 				 Vector2f position((*iter).getEnemyXPosition(), 35);
 
@@ -147,3 +161,6 @@ public:
 
 
 };
+
+
+

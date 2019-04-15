@@ -14,7 +14,7 @@ using namespace std;
 #include <list>
 #include "EnemyList.h"
 #include "MissileList.h" 
-
+#include <list>
 
 using namespace sf; 
 
@@ -95,10 +95,7 @@ int main()
 			{
 				if (event.key.code == Keyboard::Space)
 				{
-					
-					
 					MissileList.addMissile(Ship.getShipPosition());
-					spacePressed = true;
 
 				}
 
@@ -123,16 +120,26 @@ int main()
 
 				//texture for the stars background
 				window.draw(background);
-
+				//draw the games
 				GameUI.drawGame(window, GameSettings); //draw the lives counter and the enemies
-				Ship.draw(window);
+				//draw the ship/move the ship
 				Ship.moveShip();
+				Ship.draw(window);
 
+				//draw the enemies and move the enemies
 				EnemyList.moveEnemies();
 				EnemyList.DrawEnemies(window);
 				
+
+				if (MissileList.getListOfMissiles().size() > 0)
+				{
+					EnemyList.CheckDeleteEnemy(MissileList, GameSettings);
+				}
 				
 
+				MissileList.drawMissiles(window);  //draw the missiles, pass the window and the bool
+				MissileList.CheckIfOffscreen(); //check to see if the missile is off the screen 
+				
 
 				//we need to check to see if any of the enemies passes the Y value
 				if (EnemyList.enemyTooLow() == true)
@@ -149,18 +156,14 @@ int main()
 				//check to see if the missiles hit the enemy
 				//pass the missile list and the Gamesetting to keep track of enemies killed
 				
+			
 
+				
+				
+					
+				
+				
 
-				//COME BACK TO THIS WITH THE MISSILE LIST
-				/*EnemyList.CheckDeleteEnemy(missile, GameSettings);
-*/
-				//if the missile fired
-				if (spacePressed)
-				{
-				
-					MissileList.drawMissiles(window);  //draw the missiles, pass the window and the bool
-				
-				}
 				
 				
 
