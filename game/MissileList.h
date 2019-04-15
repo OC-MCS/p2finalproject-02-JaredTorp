@@ -55,7 +55,7 @@ public:
 			if ( (*iter).getMissileYPos() < 0) //checks the y position
 			{
 				iter = ListOfMissiles.erase(iter); //delete the missile when it goes offscreen
-				cout << ListOfMissiles.size() << endl;
+				
 			}
 			else
 			{
@@ -66,7 +66,7 @@ public:
 
 	}
 
-	list<Missile> getListOfMissiles() 
+	list<Missile>& getListOfMissiles() 
 	{
 		return ListOfMissiles;
 	}

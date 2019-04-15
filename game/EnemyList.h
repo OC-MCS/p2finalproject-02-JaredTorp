@@ -51,25 +51,39 @@ public:
 	{
 		list<Enemy>::iterator EnemyIter;
 		list<Missile>::iterator MissileIter;
-	
-		for (EnemyIter = ListOfEnemies.begin(); EnemyIter != ListOfEnemies.end();)
+		bool hit = false;
+		int count = 0;
+
+		for (MissileIter = missiles.getListOfMissiles().begin(); MissileIter != missiles.getListOfMissiles().end();)
 		{
 			//cout << "here01" << endl;
-			for (MissileIter = missiles.getListOfMissiles().begin(); MissileIter != missiles.getListOfMissiles().end();)
+			for (EnemyIter = ListOfEnemies.begin(); EnemyIter != ListOfEnemies.end();)
 			{
-				//cout << "here02" << endl;
+				
 				if ((*EnemyIter).getEnemyBounds().intersects((*MissileIter).getMissileBounds()))
 				{
+					count++;
+					cout << "here02";
+					cout << count << endl;
 					EnemyIter = ListOfEnemies.erase(EnemyIter); //delete alien these are fine
-					MissileIter = missiles.getListOfMissiles().erase(MissileIter); // these are fine
 					GameSettings.EnemyKilled(); //an enemy is killed
+					hit = true;
 				}
 				else
 				{
-					
 					EnemyIter++;
-					MissileIter++;
+					
 				}
+				
+			}
+			if (hit)
+			{
+				MissileIter = missiles.getListOfMissiles().erase(MissileIter); // these are fine
+				hit = false; //reset the flag if it is true
+			}
+			else
+			{
+				MissileIter++;
 				
 			}
 			

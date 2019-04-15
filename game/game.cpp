@@ -129,12 +129,8 @@ int main()
 				//draw the enemies and move the enemies
 				EnemyList.moveEnemies();
 				EnemyList.DrawEnemies(window);
+				EnemyList.CheckDeleteEnemy(MissileList, GameSettings); //checks to see if the enemy is dead
 				
-
-				if (MissileList.getListOfMissiles().size() > 0)
-				{
-					EnemyList.CheckDeleteEnemy(MissileList, GameSettings);
-				}
 				
 
 				MissileList.drawMissiles(window);  //draw the missiles, pass the window and the bool
