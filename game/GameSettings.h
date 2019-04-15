@@ -7,8 +7,7 @@ class GameSettings
 private:
 	int lives; //we keep track the amount of lives that the player has
 	int enemiesKilled; //we keep track of the number of enemies killed
-
-	//handle and know the levels (do this AFTER level one is done)
+	int level; //to keep track of the level
 
 public:
 	//constructor
