@@ -170,6 +170,12 @@ public:
 
 	 //}
 
+	 //get the list by reference to see if they have been killed
+	 list<Enemy>& getEnemyList()
+	 {
+		 return ListOfEnemies;
+	 }
+
 
 };
 

@@ -72,7 +72,7 @@ int main()
 	background.setScale(1.5, 1.5);
 
 	
-
+	bool PlayerHit;
 
 	//ANIMATION LOOP
 	while (window.isOpen())
@@ -120,10 +120,12 @@ int main()
 
 			}
 
-			//the game starts at Level 1
-			else if (GameSettings.getLives() != 0 && GameSettings.getLevel() == 1) // we want to keep in this if function until lives = 0
-			{
+			//the game starts here, the level should be at level one
+			//figure out how to resart the game WITHOUT going into a whole different While loop
 
+			else if (GameSettings.getLives() != 0) // we want to keep in this if function until lives = 0
+			{
+				
 
 
 
@@ -154,14 +156,15 @@ int main()
 				//do game1 bomb
 				/*Enemies.DropBomb(Bombs);*/
 				Bombs.drawBombs(window); //function that draws bombs
-
-
+				Bombs.CheckIfOffscreen(); //checks to see if we need to delete the bombs
+				
+				//sets the bool to true or false, whether or not the player has been hit by a bomb
+				PlayerHit = Bombs.CheckHitPlayer(Ship); //we need to check if the bomb hits the player, so we pass the ship
 
 
 				//we need to check to see if any of the enemies passes the Y value
-				if (Enemies.enemyTooLow() == true)
+				if (Enemies.enemyTooLow() == true || PlayerHit)
 				{
-					cout << "The enemies are too low!" << endl;
 					GameSettings.LoseLife(); //need to lose a life
 					Enemies.resetEnemyPositions(); //need to reset the enemies positions back to the top
 
@@ -169,15 +172,35 @@ int main()
 
 				}
 
+				//check to see if all the enemies have been killed!
+				if (Enemies.getEnemyList().size() == 0)
+				{
+					//set the level to two
+					GameSettings.setLevel(2); 
+
+					//change the random number for bombs dropped
+					
+
+				}
+
+				//check if Game is Over
+				if (GameSettings.getLives() == 0)
+				{
+					//restart the game??? this takes us back to the start screen
+					GameSettings.setLevel(0);
+
+					//Aliens win!
+
+				}
 
 
 
 			}
+			
+			
+			//would I do another while loop? I might just adjust the settings, recreate the enemies, and start again
 			//Level 2 
-			while (GameSettings.getLives() != 0 && GameSettings.getLevel() == 2)
-			{
-
-			}
+			
 
 
 

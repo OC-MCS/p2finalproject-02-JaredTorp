@@ -10,8 +10,6 @@ private:
 	list<Bomb> ListOfBombs;
 	Texture bombTexture;
 
-
-
 public:
 	
 	void addBomb(Vector2f EnemyPos)
@@ -40,7 +38,46 @@ public:
 		}
 	}
 
+	void CheckIfOffscreen()
+	{
 
+		list<Bomb>::iterator iter;
+		for (iter = ListOfBombs.begin(); iter != ListOfBombs.end(); )
+		{
+			if ((*iter).getBombYPos() < 0) //checks the y position
+			{
+				iter = ListOfBombs.erase(iter); //delete the bomb when it goes offscreen
+
+			}
+			else
+			{
+				iter++;
+			}
+
+		}
+
+	}
+
+	//function checks if the player hat been hit
+	bool CheckHitPlayer(Ship& player)
+	{
+		bool hit = false;
+		list<Bomb>::iterator iter;
+		for (iter = ListOfBombs.begin(); iter != ListOfBombs.end(); )
+		{
+			if ((*iter).getBombBounds().intersects(player.getShipBounds())) //checks the bounds and sees if they intersect
+			{
+				iter = ListOfBombs.erase(iter); //delete the bomb when it goes offscreen
+				hit = true;
+			}
+			else
+			{
+				iter++;
+			}
+
+		}
+		return hit;
+	}
 
 
 
