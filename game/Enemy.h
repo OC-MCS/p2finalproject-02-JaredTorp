@@ -11,7 +11,7 @@ class Enemy
 {
 private:
 	Sprite enemy;
-	
+	int movement; 
 	
 
 public:
@@ -19,12 +19,16 @@ public:
 
 
 	//overloaded constructor that accepts an int for the "name" of the enemy and its position
-	Enemy(Vector2f pos, Texture& enemyTexture)
+	Enemy(Vector2f pos, Texture& enemyTexture, int movement)
 	{
 		//set the texture of the enemy
 		enemy.setTexture(enemyTexture);
 
 		enemy.setPosition(pos);
+		
+		this->movement = movement;
+
+
 	}
 
 
@@ -40,11 +44,9 @@ public:
 
 	//funtion to set the speed of the nemy
 	void EnemyMove()
-	{
-		const float SPEED = 1.0f;
-				
-			
-		enemy.move(0, SPEED);
+	{	
+		
+		enemy.move(0, movement);
 			
 		
 	}
@@ -71,5 +73,11 @@ public:
 	{
 		return enemy.getPosition().x;
 	}
+
+	int SetEnemyMovement(float num)
+	{
+		
+	}  
+
 
 };

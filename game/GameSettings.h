@@ -9,6 +9,9 @@ private:
 	int enemiesKilled; //we keep track of the number of enemies killed
 	int level; //to keep track of the level
 
+	int level1DropRate;
+	int Level2DropRate;
+
 public:
 	//constructor
 	GameSettings()
@@ -17,6 +20,8 @@ public:
 		lives = NUM_LIVES; //set the amount of lives and store it in private data
 		enemiesKilled = 0; //surely they can't kill enemies before the game starts
 		level = 0; //everyone starts at the start screen
+		level1DropRate = 120; //drops a bomb every 120 frames, 2 seconds
+		Level2DropRate = 60; //drops a bomb ever 60 frams, 1 seconds
 	}
 
 	//getter for lives
@@ -60,6 +65,16 @@ public:
 	void setLevel(int num)
 	{
 		level = num;
+	}
+
+	int getLevel1DropRate()
+	{
+		return level1DropRate;
+	}
+
+	int getLevel2DropRate()
+	{
+		return Level2DropRate;
 	}
 
 

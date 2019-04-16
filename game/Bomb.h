@@ -12,6 +12,7 @@ class Bomb
 private:
 	Sprite bomb;
 
+	int movement;
 
 
 public:
@@ -21,12 +22,13 @@ public:
 	{
 		bomb.setTexture(bombTexture);
 		bomb.setPosition(pos);
+		movement = 5;
 	}
 
 	//drawing the bomb WHEN we drop one
 	void dropBomb(RenderWindow& win)
 	{
-		bomb.move(0, 10); //move the bomb
+		
 		win.draw(bomb); //draw the bomb
 
 	}
@@ -46,9 +48,14 @@ public:
 	//draw the bomb
 	void draw(RenderWindow& win)
 	{
+		bomb.move(0, movement); //move the bomb
 		win.draw(bomb);
 	}
 
+	void setBombMovement(int num)
+	{
+		movement = num;
+	}
 
 
 

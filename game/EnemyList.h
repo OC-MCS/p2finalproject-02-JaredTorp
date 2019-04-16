@@ -5,6 +5,7 @@
 #include "missile.h"
 #include "missileList.h"
 #include "BombList.h"
+#include <stdlib.h>
 
 //this class is for a list of enemies
 //this is the container class for the list of enemies
@@ -18,7 +19,8 @@ private:
 
 
 public:
-	EnemyList()
+
+	EnemyList(/*Needs the current level*/)
 	{
 		if (!enemyTexture.loadFromFile("Lv2Alien.png"))
 		{
@@ -33,7 +35,8 @@ public:
 			{
 				Vector2f position(xPosition, 35);
 
-				Enemy enemy(position, enemyTexture);
+				//this needs to know the level
+				Enemy enemy(position, enemyTexture, );
 
 				ListOfEnemies.push_back(enemy);
 
@@ -112,6 +115,7 @@ public:
 	void moveEnemies()
 	{
 		list<Enemy>::iterator iter;
+
 		for (iter = ListOfEnemies.begin(); iter != ListOfEnemies.end(); iter++)
 		{
 			(*iter).EnemyMove();
@@ -162,13 +166,20 @@ public:
 
 	 }
 
-	 //void DropBomb(BombList& Bombs)
-	 //{
-		// //get random Enemy from the list
-		// //advance to that enemy
-		// Bombs.addBomb(//iter.getposition)
+	 void DropBomb(BombList& Bombs)
+	 {
+		 list<Enemy>::iterator iter;
+		 int random;
+		 random = (rand() % (ListOfEnemies.size()));
 
-	 //}
+		
+
+		 //advance to that enemy
+		 iter = ListOfEnemies.begin();
+		 advance(iter, random); // advance is a library function that advances iterator
+		 Bombs.addBomb((*iter).getEnemyPosition());
+
+	 }
 
 	 //get the list by reference to see if they have been killed
 	 list<Enemy>& getEnemyList()

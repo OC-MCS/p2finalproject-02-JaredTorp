@@ -51,7 +51,8 @@ int main()
 	MissileList Missiles;
 	BombList Bombs;
 
-	//int frameCounter; //counter to count the frames, so we can keep track of every second, 60fps
+
+	int frameCounter = 0; //counter to count the frames, so we can keep track of every second, 60fps
 
 	///////////////////////////////////////////
 	//should this be in a class?????????????//
@@ -90,6 +91,7 @@ int main()
 				//check to see if the Start button was pressed
 				Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
 				GameUI.handleMouseUp(mousePos, GameSettings); //checks the position of the moust to click the start
+				
 			}
 
 
@@ -154,7 +156,15 @@ int main()
 				//do the srand for level 1
 
 				//do game1 bomb
-				/*Enemies.DropBomb(Bombs);*/
+
+
+				/*if (frameCounter == GameSettings.getLevel1DropRate())
+				{*/
+				Enemies.DropBomb(Bombs);
+				/*frameCounter = 0;
+				}*/
+				
+
 				Bombs.drawBombs(window); //function that draws bombs
 				Bombs.CheckIfOffscreen(); //checks to see if we need to delete the bombs
 				
@@ -203,22 +213,12 @@ int main()
 			
 
 
-
-
-
-
-
-
-
-
-
-
 		// end the current frame; this makes everything that we have 
 		// already "drawn" actually show up on the screen
 			window.display();
 
 			
-			//frameCounter++; //to count the frames, will count 60 a second
+			frameCounter++; //to count the frames, will count 60 a second
 
 
 

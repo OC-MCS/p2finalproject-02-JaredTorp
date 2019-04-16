@@ -37,14 +37,16 @@ public:
 
 		}
 	}
+	 
 
+	//checks the bomb offscreen
 	void CheckIfOffscreen()
 	{
 
 		list<Bomb>::iterator iter;
 		for (iter = ListOfBombs.begin(); iter != ListOfBombs.end(); )
 		{
-			if ((*iter).getBombYPos() < 0) //checks the y position
+			if ((*iter).getBombYPos() > 600) //checks the y position if they go offscreen
 			{
 				iter = ListOfBombs.erase(iter); //delete the bomb when it goes offscreen
 
@@ -55,6 +57,7 @@ public:
 			}
 
 		}
+		
 
 	}
 
