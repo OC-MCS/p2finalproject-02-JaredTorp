@@ -16,7 +16,7 @@ public:
 
 		lives = NUM_LIVES; //set the amount of lives and store it in private data
 		enemiesKilled = 0; //surely they can't kill enemies before the game starts
-		level = 1; //everyone starts at level one
+		level = 0; //everyone starts at the start screen
 	}
 
 	//getter for lives
@@ -57,7 +57,10 @@ public:
 		return level;
 	}
 
-
+	void setLevel(int num)
+	{
+		level = num;
+	}
 
 
 

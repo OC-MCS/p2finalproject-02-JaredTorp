@@ -51,7 +51,7 @@ int main()
 	MissileList Missiles;
 	BombList Bombs;
 
-	int frameCounter; //counter to count the frames, so we can keep track of every second, 60fps
+	//int frameCounter; //counter to count the frames, so we can keep track of every second, 60fps
 
 	///////////////////////////////////////////
 	//should this be in a class?????????????//
@@ -89,7 +89,7 @@ int main()
 			{
 				//check to see if the Start button was pressed
 				Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
-				GameUI.handleMouseUp(mousePos); //checks the position of the moust to click the start
+				GameUI.handleMouseUp(mousePos, GameSettings); //checks the position of the moust to click the start
 			}
 
 
@@ -110,8 +110,8 @@ int main()
 
 
 
-			//the game hasnt started
-			if (!GameUI.getGameStarted())
+			//the game hasnt started, Level 0
+			if (GameSettings.getLevel() == 0)
 			{
 
 				window.draw(background);
@@ -120,9 +120,11 @@ int main()
 
 			}
 
-			//the game starts
-			else if (GameSettings.getLives() != 0 && GameUI.getGameStarted()) // we want to keep in this if function until lives = 0
+			//the game starts at Level 1
+			else if (GameSettings.getLives() != 0 && GameSettings.getLevel() == 1) // we want to keep in this if function until lives = 0
 			{
+
+
 
 
 				//texture for the stars background
@@ -146,21 +148,13 @@ int main()
 				Missiles.CheckIfOffscreen(); //check to see if the missile is off the screen 
 				
 				//Bombs
-				if (GameSettings.getLevel() == 1)
-				{
-					//i think im doing these if statements wrong
-					
+			
+				//do the srand for level 1
 
-					//do game1 bomb
-					Enemies.DropBomb(Bombs);
-					Bombs.drawBombs(window); //function that draws bombs
+				//do game1 bomb
+				/*Enemies.DropBomb(Bombs);*/
+				Bombs.drawBombs(window); //function that draws bombs
 
-
-				}
-				else if (GameSettings.getLevel() == 2)
-				{
-					//do game2 bomb
-				}
 
 
 
@@ -176,24 +170,23 @@ int main()
 				}
 
 
-				//check to see if the missiles hit the enemy
-				//pass the missile list and the Gamesetting to keep track of enemies killed
-				
-			
-
-				
-				
-					
-				
-				
-
-				
-				
-
-
 
 
 			}
+			//Level 2 
+			while (GameSettings.getLives() != 0 && GameSettings.getLevel() == 2)
+			{
+
+			}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -202,7 +195,7 @@ int main()
 			window.display();
 
 			
-			frameCounter++; //to count the frames, will count 60 a second
+			//frameCounter++; //to count the frames, will count 60 a second
 
 
 

@@ -92,14 +92,15 @@ public:
 	
 	
 	//handles pressing the start button
-	void handleMouseUp(Vector2f mouse)
+	void handleMouseUp(Vector2f mouse, GameSettings& obj)
 	{
 		if (StartBtn.getGlobalBounds().contains(mouse)) //mouse is a Vector2f
 		{
 			//get rid of the Start Button
 			//get rid of the screen
 			//run the game
-			isGameStarted = true;
+
+			obj.setLevel(1);
 			
 		}
 	}

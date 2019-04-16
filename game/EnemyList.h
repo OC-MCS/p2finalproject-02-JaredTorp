@@ -4,6 +4,7 @@
 #include <list>
 #include "missile.h"
 #include "missileList.h"
+#include "BombList.h"
 
 //this class is for a list of enemies
 //this is the container class for the list of enemies
@@ -11,9 +12,9 @@
 class EnemyList
 {
 private:
-	list <Enemy>ListOfEnemies;
+	list <Enemy>ListOfEnemies; //to control the list of bombs
 	Texture enemyTexture;
-
+	
 
 
 public:
@@ -89,16 +90,6 @@ public:
 
 
 	}
-
-	
-	
-	
-	
-	
-	
-	//position function should be in main?
-
-
 	//draw the list of enemies function
 
 	void DrawEnemies(RenderWindow& win)
@@ -170,6 +161,14 @@ public:
 	
 
 	 }
+
+	 //void DropBomb(BombList& Bombs)
+	 //{
+		// //get random Enemy from the list
+		// //advance to that enemy
+		// Bombs.addBomb(//iter.getposition)
+
+	 //}
 
 
 };
