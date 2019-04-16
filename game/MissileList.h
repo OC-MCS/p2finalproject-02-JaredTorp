@@ -15,7 +15,7 @@ private:
 
 public:
 
-
+	  
 	void addMissile(Vector2f ShipPos)
 	{
 
