@@ -65,7 +65,7 @@ public:
 	{
 		return enemy.getGlobalBounds();
 	}
-
+	  
 	//this function helps us get the x position of the current enemy
 	int getEnemyXPosition()
 	{
