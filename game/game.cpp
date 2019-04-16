@@ -15,6 +15,7 @@ using namespace std;
 #include "EnemyList.h"
 #include "MissileList.h" 
 #include <list>
+#include "BombList.h"
 
 using namespace sf; 
 
@@ -46,9 +47,11 @@ int main()
 	GameUI GameUI;
 	Ship Ship(window);//creates the ship object and passes the window
 	GameSettings GameSettings;
-	EnemyList EnemyList;
-	MissileList MissileList;
+	EnemyList Enemies;
+	MissileList Missiles;
+	BombList Bombs;
 
+	int frameCounter; //counter to count the frames, so we can keep track of every second, 60fps
 
 	///////////////////////////////////////////
 	//should this be in a class?????????????//
@@ -95,13 +98,17 @@ int main()
 			{
 				if (event.key.code == Keyboard::Space)
 				{
-					MissileList.addMissile(Ship.getShipPosition());
+					Missiles.addMissile(Ship.getShipPosition());
 
 				}
 
 			}
 
 		}
+
+		
+
+
 
 			//the game hasnt started
 			if (!GameUI.getGameStarted())
@@ -120,29 +127,49 @@ int main()
 
 				//texture for the stars background
 				window.draw(background);
+
 				//draw the games
 				GameUI.drawGame(window, GameSettings); //draw the lives counter and the enemies
+
 				//draw the ship/move the ship
 				Ship.moveShip();
 				Ship.draw(window);
 
 				//draw the enemies and move the enemies
-				EnemyList.moveEnemies();
-				EnemyList.DrawEnemies(window);
-				EnemyList.CheckDeleteEnemy(MissileList, GameSettings); //checks to see if the enemy is dead
+				Enemies.moveEnemies();
+				Enemies.DrawEnemies(window);
+				Enemies.CheckDeleteEnemy(Missiles, GameSettings); //checks to see if the enemy is dead
 				
 				
+				//draw/fire the Missiles
+				Missiles.drawMissiles(window);  //draw the missiles, pass the window and the bool
+				Missiles.CheckIfOffscreen(); //check to see if the missile is off the screen 
+				
+				//Bombs
+				if (GameSettings.getLevel() == 1)
+				{
+					//i think im doing these if statements wrong
+					
 
-				MissileList.drawMissiles(window);  //draw the missiles, pass the window and the bool
-				MissileList.CheckIfOffscreen(); //check to see if the missile is off the screen 
-				
+					//do game1 bomb
+					Enemies.DropBomb(Bombs);
+					Bombs.drawBombs(window); //function that draws bombs
+
+
+				}
+				else if (GameSettings.getLevel() == 2)
+				{
+					//do game2 bomb
+				}
+
+
 
 				//we need to check to see if any of the enemies passes the Y value
-				if (EnemyList.enemyTooLow() == true)
+				if (Enemies.enemyTooLow() == true)
 				{
 					cout << "The enemies are too low!" << endl;
 					GameSettings.LoseLife(); //need to lose a life
-					EnemyList.resetEnemyPositions(); //need to reset the enemies positions back to the top
+					Enemies.resetEnemyPositions(); //need to reset the enemies positions back to the top
 
 					/*GameUI.setGameStarted(false); */ //keep this here, do we restart?
 
@@ -174,7 +201,8 @@ int main()
 		// already "drawn" actually show up on the screen
 			window.display();
 
-
+			
+			frameCounter++; //to count the frames, will count 60 a second
 
 
 

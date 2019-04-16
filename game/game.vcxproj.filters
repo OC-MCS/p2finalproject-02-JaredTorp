@@ -37,9 +37,6 @@
     <ClInclude Include="Bomb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Missile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -49,10 +46,13 @@
     <ClInclude Include="Lab05 original code.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyList.h">
+    <ClInclude Include="BombList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BombList.h">
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
