@@ -68,7 +68,7 @@ int main()
 	// The texture file is 640x480, so scale it up a little to cover 800x600 window
 	background.setScale(1.5, 1.5);
 
-	bool spacePressed = false; //to keep track of the misiles when the space is pressed
+	
 
 
 	//ANIMATION LOOP

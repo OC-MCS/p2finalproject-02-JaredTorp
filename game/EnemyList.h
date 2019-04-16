@@ -19,7 +19,7 @@ private:
 public:
 	EnemyList()
 	{
-		if (!enemyTexture.loadFromFile("Alien.png"))
+		if (!enemyTexture.loadFromFile("Lv2Alien.png"))
 		{
 			cout << "Unable to load enemy texture!" << endl;
 			exit(EXIT_FAILURE);
@@ -62,9 +62,7 @@ public:
 				
 				if ((*EnemyIter).getEnemyBounds().intersects((*MissileIter).getMissileBounds()))
 				{
-					count++;
-					cout << "here02";
-					cout << count << endl;
+					
 					EnemyIter = ListOfEnemies.erase(EnemyIter); //delete alien these are fine
 					GameSettings.EnemyKilled(); //an enemy is killed
 					hit = true;
