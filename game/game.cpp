@@ -19,6 +19,9 @@ using namespace std;
 
 using namespace sf; 
 
+
+void ResetGame(EnemyList& Enemies, MissileList& Missiles, BombList& Bombs, GameSettings& Settings); //prototype
+
 //============================================================
 // Jared Torp
 // Final project, Space invaders
@@ -46,7 +49,7 @@ int main()
 	//creating the GameUI object 
 	GameUI GameUI;
 	Ship Ship(window);//creates the ship object and passes the window
-	GameSettings GameSettings;
+	GameSettings Settings;
 	EnemyList Enemies;
 	MissileList Missiles;
 	BombList Bombs;
@@ -91,7 +94,7 @@ int main()
 			{
 				//check to see if the Start button was pressed
 				Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
-				GameUI.handleMouseUp(mousePos, GameSettings); //checks the position of the moust to click the start
+				GameUI.handleMouseUp(mousePos, Settings); //checks the position of the moust to click the start
 			
 			}
 			else if (event.type == Event::KeyPressed)
@@ -111,7 +114,7 @@ int main()
 
 
 			//the game hasnt started
-			if (GameSettings.getGameStarted() ==  false)
+			if (Settings.getGameStarted() ==  false)
 			{
 
 				window.draw(background);
@@ -130,7 +133,7 @@ int main()
 			//the game starts here, the level should be at level one
 			//figure out how to resart the game WITHOUT going into a whole different While loop
 
-			else if (GameSettings.getGameStarted() == true) // The game has started
+			else if (Settings.getGameStarted() == true) // The game has started
 			{
 				
 
@@ -140,7 +143,7 @@ int main()
 				window.draw(background);
 
 				//draw the games
-				GameUI.drawGame(window, GameSettings); //draw the lives counter and the enemies
+				GameUI.drawGame(window, Settings); //draw the lives counter and the enemies
 
 				//draw the ship/move the ship
 				Ship.moveShip();
@@ -149,7 +152,7 @@ int main()
 				//draw the enemies and move the enemies
 				Enemies.moveEnemies();
 				Enemies.DrawEnemies(window);
-				Enemies.CheckDeleteEnemy(Missiles, GameSettings); //checks to see if the enemy is dead
+				Enemies.CheckDeleteEnemy(Missiles, Settings); //checks to see if the enemy is dead
 				
 				
 				//draw/fire the Missiles
@@ -158,7 +161,7 @@ int main()
 				
 				//Bombs
 				//do game1 bomb
-				if (frameCounter == GameSettings.getDropRate())
+				if (frameCounter == Settings.getDropRate())
 				{
 					Enemies.DropBomb(Bombs);
 					frameCounter = 0;
@@ -174,7 +177,7 @@ int main()
 				//we need to check to see if any of the enemies passes the Y value
 				if (Enemies.enemyTooLow() == true || PlayerHit)
 				{
-					GameSettings.LoseLife(); //need to lose a life
+					Settings.LoseLife(); //need to lose a life
 					Enemies.resetEnemyPositions(); //need to reset the enemies positions back to the top
 					Bombs.DeleteList(); //we dont want the bombs to stay
 					Missiles.DeleteList(); //also resets the missiles 
@@ -182,33 +185,26 @@ int main()
 				}
 
 				//check to see if all the enemies have been killed!
-				if (Enemies.getEnemyList().size() == 0 && GameSettings.getLevel() == 1)
+				if (Enemies.getEnemyList().size() == 0 && Settings.getLevel() == 1)
 				{
 					//set the level to two
-					GameSettings.setLevel(2); 
+					Settings.setLevel(2); 
 					Missiles.DeleteList(); //because we dont want to accidentally shoot the level 2 enemies
 					Bombs.DeleteList(); //we dont want the bombs to stay
-					Enemies.createEnemies(GameSettings.getLevel()); //recreate the enemies
-					GameSettings.setDropRate(60);//change the time (frames), for the drop rate
+					Enemies.createEnemies(Settings.getLevel()); //recreate the enemies
+					Settings.setDropRate(60);//change the time (frames), for the drop rate
 					//so it drops every second
 					frameCounter = 0; //reset the frame counter
 
 				}
 
 				//Level 2 checks to see if the game is over
-				if (Enemies.getEnemyList().size() == 0 && GameSettings.getLevel() == 2)
+				if (Enemies.getEnemyList().size() == 0 && Settings.getLevel() == 2)
 				{
 					//resetting the game
-					Enemies.DeleteList(); //delete all the enemies
-					Missiles.DeleteList(); //delete all the Missiles
-					Bombs.DeleteList(); //delete all the bombs
-					GameSettings.setLives(3); //set the lives back to 3
-					GameSettings.setLevel(1); //set the level back to one
-					Enemies.createEnemies(1); //create the enemies for level 1
-					GameSettings.setDropRate(120); //set the drop rate back to 120
-					GameSettings.setEnemyKilled(0); //setting the enemies killed back to zero
+					ResetGame(Enemies, Missiles, Bombs, Settings); //func call to reset the game
 					frameCounter = 0; //reset the frame counter
-					GameSettings.setGameStarted(false); //the game is now NOT started
+					Settings.setGameStarted(false); //the game is now NOT started
 					gameWon = true; //game was  won
 					gameLost = false; //game was not lost
 					//YOU WIN!
@@ -216,19 +212,12 @@ int main()
 
 				//check if GAMEOVER when lives run out
 				//this function will reset the game
-				if (GameSettings.getLives() == 0)
+				if (Settings.getLives() == 0)
 				{
 					//resetting the game
-					Enemies.DeleteList(); //delete all the enemies
-					Missiles.DeleteList(); //delete all the Missiles
-					Bombs.DeleteList(); //delete all the bombs
-					GameSettings.setLives(3); //set the lives back to 3
-					GameSettings.setLevel(1); //set the level back to one
-					Enemies.createEnemies(1); //create the enemies for level 1
-					GameSettings.setDropRate(120); //set the drop rate back to 120
-					GameSettings.setEnemyKilled(0); //setting the enemies killed back to zero
+					ResetGame(Enemies, Missiles, Bombs, Settings); //func call to reset the game
 					frameCounter = 0; //reset the frame counter
-					GameSettings.setGameStarted(false); //the game is now NOT started
+					Settings.setGameStarted(false); //the game is now NOT started
 					gameWon = false; //game was not won
 					gameLost = true; //game was lost
 					//Aliens win!
@@ -257,6 +246,21 @@ int main()
 
 		
 	}
+
+	
 	
 	return 0;
+}
+
+//function to reset the game
+void ResetGame(EnemyList& Enemies, MissileList& Missiles, BombList& Bombs, GameSettings& Settings)
+{
+	Enemies.DeleteList(); //delete all the enemies
+	Missiles.DeleteList(); //delete all the Missiles
+	Bombs.DeleteList(); //delete all the bombs
+	Settings.setLives(3); //set the lives back to 3
+	Settings.setLevel(1); //set the level back to one
+	Enemies.createEnemies(1); //create the enemies for level 1
+	Settings.setDropRate(120); //set the drop rate back to 120
+	Settings.setEnemyKilled(0); //setting the enemies killed back to zero
 }

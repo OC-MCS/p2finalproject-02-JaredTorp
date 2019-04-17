@@ -69,7 +69,7 @@ public:
 			{
 
 				Vector2f position(xPosition, 35);
-				Enemy enemy(position, enemyTexture, 2.0f); //increase the speed on level 2
+				Enemy enemy(position, enemyTexture, 2.5f); //increase the speed on level 2
 				ListOfEnemies.push_back(enemy);
 				xPosition += offset;
 
