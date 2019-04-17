@@ -72,6 +72,19 @@ public:
 	}
 
 
+	//this function deletes the list of missiles
+	void DeleteList()
+	{
+		list<Missile>::iterator iter;
+		for (iter = ListOfMissiles.begin(); iter != ListOfMissiles.end();)
+		{
+		
+				iter = ListOfMissiles.erase(iter);
+			
+		}
+
+	}
+
 
 
 

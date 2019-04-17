@@ -54,9 +54,7 @@ int main()
 
 	int frameCounter = 0; //counter to count the frames, so we can keep track of every second, 60fps
 
-	///////////////////////////////////////////
-	//should this be in a class?????????????//
-	/////////////////////////////////////////
+	
 	Texture starsTexture;
 	if (!starsTexture.loadFromFile("stars.jpg"))
 	{
@@ -73,7 +71,8 @@ int main()
 	background.setScale(1.5, 1.5);
 
 	
-	bool PlayerHit;
+	bool PlayerHit; //define a bool to check if the player was hit
+
 
 	//ANIMATION LOOP
 	while (window.isOpen())
@@ -91,11 +90,8 @@ int main()
 				//check to see if the Start button was pressed
 				Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
 				GameUI.handleMouseUp(mousePos, GameSettings); //checks the position of the moust to click the start
-				
+			
 			}
-
-
-
 			else if (event.type == Event::KeyPressed)
 			{
 				if (event.key.code == Keyboard::Space)
@@ -112,20 +108,20 @@ int main()
 
 
 
-			//the game hasnt started, Level 0
-			if (GameSettings.getLevel() == 0)
+			//the game hasnt started
+			if (GameSettings.getGameStarted() ==  false)
 			{
 
 				window.draw(background);
 				GameUI.drawStart(window);
-
+				
 
 			}
 
 			//the game starts here, the level should be at level one
 			//figure out how to resart the game WITHOUT going into a whole different While loop
 
-			else if (GameSettings.getLives() != 0) // we want to keep in this if function until lives = 0
+			else if (GameSettings.getGameStarted() == true) // The game has started
 			{
 				
 
@@ -152,18 +148,12 @@ int main()
 				Missiles.CheckIfOffscreen(); //check to see if the missile is off the screen 
 				
 				//Bombs
-			
-				//do the srand for level 1
-
 				//do game1 bomb
-
-
-				/*if (frameCounter == GameSettings.getLevel1DropRate())
-				{*/
-				Enemies.DropBomb(Bombs);
-				/*frameCounter = 0;
-				}*/
-				
+				if (frameCounter == GameSettings.getDropRate())
+				{
+					Enemies.DropBomb(Bombs);
+					frameCounter = 0;
+				}
 
 				Bombs.drawBombs(window); //function that draws bombs
 				Bombs.CheckIfOffscreen(); //checks to see if we need to delete the bombs
@@ -178,26 +168,40 @@ int main()
 					GameSettings.LoseLife(); //need to lose a life
 					Enemies.resetEnemyPositions(); //need to reset the enemies positions back to the top
 
-					/*GameUI.setGameStarted(false); */ //keep this here, do we restart?
 
 				}
 
 				//check to see if all the enemies have been killed!
-				if (Enemies.getEnemyList().size() == 0)
+				if (Enemies.getEnemyList().size() == 0 && GameSettings.getLevel() == 1)
 				{
 					//set the level to two
-					GameSettings.setLevel(2); 
 
-					//change the random number for bombs dropped
-					
+					GameSettings.setLevel(2); 
+					Missiles.DeleteList(); //because we dont want to accidentally shoot the level 2 enemies
+					Enemies.createEnemies(GameSettings.getLevel()); //recreate the enemies
+					GameSettings.setDropRate(60);//change the time (frames), for the drop rate
+					//so it drops every second
+					frameCounter = 0; //reset the frame counter
 
 				}
 
-				//check if Game is Over
+				//Level 2 checks to see if the game is over
+				if (Enemies.getEnemyList().size() == 0 && GameSettings.getLevel() == 2)
+				{
+					//YOU WIN!
+				}
+
+				//check if GAMEOVER when lives run out
+				//this function will reset the game
 				if (GameSettings.getLives() == 0)
 				{
-					//restart the game??? this takes us back to the start screen
-					GameSettings.setLevel(0);
+					//resetting the game
+					GameSettings.setLives(3); //set the lives back to 3
+					GameSettings.setLevel(1); //set the level back to one
+					Enemies.createEnemies(1); //create the enemies for level 1
+					GameSettings.setDropRate(120); //set the drop rate back to 120
+					GameSettings.setGameStarted(false); //the game is now NOT started
+					
 
 					//Aliens win!
 
@@ -217,7 +221,6 @@ int main()
 		// already "drawn" actually show up on the screen
 			window.display();
 
-			
 			frameCounter++; //to count the frames, will count 60 a second
 
 

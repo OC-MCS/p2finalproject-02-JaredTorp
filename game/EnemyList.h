@@ -20,31 +20,65 @@ private:
 
 public:
 
-	EnemyList(/*Needs the current level*/)
+	EnemyList()
 	{
-		if (!enemyTexture.loadFromFile("Lv2Alien.png"))
+		//nothing, not enough details
+	}
+
+
+	void createEnemies(int level)
+	{
+		//level 1 texture
+		if (level == 1)
 		{
+			if (!enemyTexture.loadFromFile("Alien.png"))
+			{
 			cout << "Unable to load enemy texture!" << endl;
 			exit(EXIT_FAILURE);
+			}
 		}
+		//level 2 texture
+		else if (level == 2)
+		{
+			if (!enemyTexture.loadFromFile("Lv2Alien.png"))
+			{
+				cout << "Unable to load enemy texture!" << endl;
+				exit(EXIT_FAILURE);
+			}
+		}
+	
 
-			const int offset = 75;
-			int xPosition = 47;
+		const int offset = 75;
+		int xPosition = 47;
 
+		if (level == 1)
+		{
 			for (int i = 0; i < 10; i++)
 			{
+
 				Vector2f position(xPosition, 35);
-
-				//this needs to know the level
-				Enemy enemy(position, enemyTexture, );
-
+				Enemy enemy(position, enemyTexture, 1.0f); //speed is 0.25f on level 1
 				ListOfEnemies.push_back(enemy);
-
 				xPosition += offset;
 
 			}
+		}
+		else if (level == 2)
+		{
+			for (int i = 0; i < 10; i++)
+			{
 
+				Vector2f position(xPosition, 35);
+				Enemy enemy(position, enemyTexture, 2.0f); //increase the speed on level 2
+				ListOfEnemies.push_back(enemy);
+				xPosition += offset;
+
+			}
+		}
+		
 	}
+
+
 
 
 
@@ -169,7 +203,7 @@ public:
 	 void DropBomb(BombList& Bombs)
 	 {
 		 list<Enemy>::iterator iter;
-		 int random;
+		 int random; //int that will hold the random number
 		 random = (rand() % (ListOfEnemies.size()));
 
 		

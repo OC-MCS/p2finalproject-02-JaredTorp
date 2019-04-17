@@ -43,9 +43,6 @@
     <ClInclude Include="MissileList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Lab05 original code.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BombList.h">
       <Filter>Header Files</Filter>
     </ClInclude>

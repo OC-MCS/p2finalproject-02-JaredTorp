@@ -11,7 +11,7 @@ class GameUI
 private:
 RectangleShape StartBtn;
 Vector2f StartPos; //is manually setting the button bad?
-bool isGameStarted;
+
 
 
 public:
@@ -27,9 +27,6 @@ public:
 		StartBtn.setSize(Vector2f(225, 100));
 		StartBtn.setFillColor(Color::Transparent);
 		
-		//set the game started equal to false, because we don't start the game right off the bat
-		isGameStarted = false;
-
 	}
 
 	//to draw the start button once the game starts we use the next draw function
@@ -100,7 +97,7 @@ public:
 			//get rid of the screen
 			//run the game
 
-			obj.setLevel(1);
+			obj.setGameStarted(true) ; //this will start level 1
 			
 		}
 	}
@@ -120,14 +117,5 @@ public:
 		exit(-1);
 	}
 
-	//to check if the game has started
-	bool getGameStarted()
-	{
-		return isGameStarted;
-	}
-
-	void setGameStarted(bool x)
-	{
-		isGameStarted = x;
-	}
+	
 };

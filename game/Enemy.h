@@ -74,10 +74,10 @@ public:
 		return enemy.getPosition().x;
 	}
 
-	int SetEnemyMovement(float num)
-	{
-		
-	}  
+	//int SetEnemyMovement(float num)
+	//{
+	//	
+	//}  
 
 
 };
