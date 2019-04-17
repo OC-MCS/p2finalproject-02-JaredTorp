@@ -70,7 +70,9 @@ int main()
 	// The texture file is 640x480, so scale it up a little to cover 800x600 window
 	background.setScale(1.5, 1.5);
 
-	
+	bool gameWon = false; //these bools will help us draw the text if the player
+	bool gameLost = false;// or the enemy wins the game
+
 	bool PlayerHit; //define a bool to check if the player was hit
 	Enemies.createEnemies(1); //to Initially set the level 1 enemies before we hit the loop
 
@@ -114,7 +116,14 @@ int main()
 
 				window.draw(background);
 				GameUI.drawStart(window);
-				
+				if (gameWon)
+				{
+					GameUI.drawWinner(window); //draws the text of the player winning
+				}
+				if (gameLost)
+				{
+					GameUI.drawLoser(window); //draws the text of the aliens winning
+				}
 
 			}
 
@@ -189,6 +198,19 @@ int main()
 				//Level 2 checks to see if the game is over
 				if (Enemies.getEnemyList().size() == 0 && GameSettings.getLevel() == 2)
 				{
+					//resetting the game
+					Enemies.DeleteList(); //delete all the enemies
+					Missiles.DeleteList(); //delete all the Missiles
+					Bombs.DeleteList(); //delete all the bombs
+					GameSettings.setLives(3); //set the lives back to 3
+					GameSettings.setLevel(1); //set the level back to one
+					Enemies.createEnemies(1); //create the enemies for level 1
+					GameSettings.setDropRate(120); //set the drop rate back to 120
+					GameSettings.setEnemyKilled(0); //setting the enemies killed back to zero
+					frameCounter = 0; //reset the frame counter
+					GameSettings.setGameStarted(false); //the game is now NOT started
+					gameWon = true; //game was  won
+					gameLost = false; //game was not lost
 					//YOU WIN!
 				}
 
@@ -205,10 +227,10 @@ int main()
 					Enemies.createEnemies(1); //create the enemies for level 1
 					GameSettings.setDropRate(120); //set the drop rate back to 120
 					GameSettings.setEnemyKilled(0); //setting the enemies killed back to zero
-					GameSettings.setGameStarted(false); //the game is now NOT started
 					frameCounter = 0; //reset the frame counter
-					
-
+					GameSettings.setGameStarted(false); //the game is now NOT started
+					gameWon = false; //game was not won
+					gameLost = true; //game was lost
 					//Aliens win!
 
 				}

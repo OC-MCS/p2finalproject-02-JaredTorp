@@ -83,7 +83,7 @@ public:
 
 	}
 
-
+	
 
 	
 	
@@ -117,5 +117,32 @@ public:
 		exit(-1);
 	}
 
+	void drawWinner(RenderWindow& win)
+	{
+		Font font;
+		if (!font.loadFromFile("C:\\Windows\\Fonts\\arial.ttf"))
+		{
+			die("couldn't load font");
+		}
+
+		Text WinText("A Winner Is You!", font, 30);
+		WinText.setFillColor(Color::White);
+		WinText.setPosition(300, 400);
+		win.draw(WinText);
+	}
+
+	void drawLoser(RenderWindow& win)
+	{
+		Font font;
+		if (!font.loadFromFile("C:\\Windows\\Fonts\\arial.ttf"))
+		{
+			die("couldn't load font");
+		}
+
+		Text LoseText("The Aliens Win!", font, 30);
+		LoseText.setFillColor(Color::Green);
+		LoseText.setPosition(300, 400);
+		win.draw(LoseText);
+	}
 	
 };
