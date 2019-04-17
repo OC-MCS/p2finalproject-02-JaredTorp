@@ -47,6 +47,11 @@ public:
 		enemiesKilled++;
 	}
 
+	void setEnemyKilled(int num)
+	{
+		enemiesKilled = num;
+	}
+
 	int getLevel()
 	{
 		return level;

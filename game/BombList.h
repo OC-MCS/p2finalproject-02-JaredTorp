@@ -82,6 +82,19 @@ public:
 		return hit;
 	}
 
+	//to delete the list
+	void DeleteList()
+	{
+		list<Bomb>::iterator iter;
+		for (iter = ListOfBombs.begin(); iter != ListOfBombs.end();)
+		{
+
+			iter = ListOfBombs.erase(iter);
+
+		}
+
+	}
+
 
 
 

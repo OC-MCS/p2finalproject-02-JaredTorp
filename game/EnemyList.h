@@ -220,6 +220,20 @@ public:
 	 {
 		 return ListOfEnemies;
 	 }
+	
+	 //to delete the list
+	 void DeleteList()
+	 {
+		 list<Enemy>::iterator iter;
+		 for (iter = ListOfEnemies.begin(); iter != ListOfEnemies.end();)
+		 {
+
+			 iter = ListOfEnemies.erase(iter);
+
+		 }
+
+	 }
+
 
 
 };

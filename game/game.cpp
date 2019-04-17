@@ -72,7 +72,7 @@ int main()
 
 	
 	bool PlayerHit; //define a bool to check if the player was hit
-
+	Enemies.createEnemies(1); //to Initially set the level 1 enemies before we hit the loop
 
 	//ANIMATION LOOP
 	while (window.isOpen())
@@ -167,7 +167,8 @@ int main()
 				{
 					GameSettings.LoseLife(); //need to lose a life
 					Enemies.resetEnemyPositions(); //need to reset the enemies positions back to the top
-
+					Bombs.DeleteList(); //we dont want the bombs to stay
+					Missiles.DeleteList(); //also resets the missiles 
 
 				}
 
@@ -175,9 +176,9 @@ int main()
 				if (Enemies.getEnemyList().size() == 0 && GameSettings.getLevel() == 1)
 				{
 					//set the level to two
-
 					GameSettings.setLevel(2); 
 					Missiles.DeleteList(); //because we dont want to accidentally shoot the level 2 enemies
+					Bombs.DeleteList(); //we dont want the bombs to stay
 					Enemies.createEnemies(GameSettings.getLevel()); //recreate the enemies
 					GameSettings.setDropRate(60);//change the time (frames), for the drop rate
 					//so it drops every second
@@ -196,11 +197,16 @@ int main()
 				if (GameSettings.getLives() == 0)
 				{
 					//resetting the game
+					Enemies.DeleteList(); //delete all the enemies
+					Missiles.DeleteList(); //delete all the Missiles
+					Bombs.DeleteList(); //delete all the bombs
 					GameSettings.setLives(3); //set the lives back to 3
 					GameSettings.setLevel(1); //set the level back to one
 					Enemies.createEnemies(1); //create the enemies for level 1
 					GameSettings.setDropRate(120); //set the drop rate back to 120
+					GameSettings.setEnemyKilled(0); //setting the enemies killed back to zero
 					GameSettings.setGameStarted(false); //the game is now NOT started
+					frameCounter = 0; //reset the frame counter
 					
 
 					//Aliens win!
