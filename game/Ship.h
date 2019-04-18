@@ -10,12 +10,17 @@ using namespace sf;
 class Ship
 {
 private:
-	Sprite ship;
-	float shipX;
-	float shipY;
-	Texture shipTexture;
+	Sprite ship; //sprite ship
+	float shipX; //holds the ship's x
+	float shipY; //holds the ship's y
+	Texture shipTexture; //holds the texture
 
 public:
+	//======================================================
+	// function name: Ship()
+	// parameters: RenderWindow&- window
+	// return type: none, its a constructor
+	//======================================================
 	Ship(RenderWindow& window)
 	{
 		
@@ -25,33 +30,36 @@ public:
 			exit(EXIT_FAILURE);
 		}
 		//texture the ship
-		ship.setTexture(shipTexture);
+		ship.setTexture(shipTexture); // set the texture
 
 		// initial position of the ship will be approx middle of screen
-		shipX = window.getSize().x / 2.0f;
-		shipY = window.getSize().y / 1.1f;
-		ship.setPosition(shipX, shipY);
-	
-	
-
-	
+		shipX = window.getSize().x / 2.0f; //set the ship's x
+		shipY = window.getSize().y / 1.1f; //set the ship's y
+		ship.setPosition(shipX, shipY); //set the position
 
 	}
 	
-	//function to draw the ship
-	//should we move this to gameUI?
+	//======================================================
+	// function name: draw
+	// parameters: RenderWindow&- window
+	// return type: none, its void
+	//======================================================
 	void draw(RenderWindow& win)
 	{
 		win.draw(ship);
 	}
 
 
-	//function to move the ship based on player input
+	//======================================================
+	// function name:mMoveShip
+	// parameters: none
+	// return type: none, its a void
+	//======================================================
 	void moveShip()
 	{
 		
 		
-		const float DISTANCE = 5.0f;
+		const float DISTANCE = 5.0f; //sets the move distance
 
 		if (Keyboard::isKeyPressed(Keyboard::Left))
 		{
@@ -76,16 +84,24 @@ public:
 		
 	}
 
-	//this is a function that returns the bounds of the ship
+	//======================================================
+	// function name: getShipBounds()
+	// parameters: none
+	// return type: FloatRect 
+	//======================================================
 	FloatRect getShipBounds()
 	{
-		return ship.getGlobalBounds();
+		return ship.getGlobalBounds(); //returns the bounds of the ship
 	}
 	
-	//need to get the position of the ship for the missile
+	//======================================================
+	// function name: getShipPosition()
+	// parameters: none
+	// return type: Vector2f, returns the position
+	//======================================================
 	Vector2f getShipPosition()
 	{
-		return ship.getPosition();
+		return ship.getPosition(); //returns the position
 	}
 	
 };

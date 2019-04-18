@@ -11,7 +11,11 @@ private:
 	bool isGameStarted; //to see if the game has started
 
 public:
-	//constructor
+	//======================================================
+	// function name: GameSettings()
+	// parameters: none
+	// return type: none, constructor
+	//======================================================
 	GameSettings()
 	{
 
@@ -22,70 +26,125 @@ public:
 		isGameStarted = false; //because we dont want to start the game off the bat
 	}
 
-	//getter for lives
+	//======================================================
+	// function name: getLives()
+	// parameters: none
+	// return type: int- getting the number of lives
+	//======================================================
 	int getLives()
 	{
-		return lives;
+		return lives; //return the lives
 	}
 
-	//getter for The enemies killed
+	//======================================================
+	// function name: getKilled()
+	// parameters: none
+	// return type: int- getting the number killed enemies
+	//======================================================
 	int getKilled()
 	{
-		return enemiesKilled;
+		return enemiesKilled; //returning the killed enemies
 	}
 
 
-	//this function decrements the lives if a bomb hits them or the enemies get too close
+
+	//======================================================
+	// function name: LoseLife()
+	// parameters: none
+	// return type: void
+	//======================================================
 	void LoseLife()
 	{
-		lives--;
+		lives--; //decrement the lives when lost
 	}
 
-	//this will increment the enemies killed
+	//======================================================
+	// function name: EnemyKilled()
+	// parameters: none
+	// return type: void
+	//======================================================
 	void EnemyKilled()
 	{
-		enemiesKilled++;
+		enemiesKilled++; //increment the enemies killed
 	}
-
+	
+	//======================================================
+	// function name: setEnemyKilled()
+	// parameters: int num, passing the number to set the killd
+	// return type: void
+	//======================================================
 	void setEnemyKilled(int num)
 	{
-		enemiesKilled = num;
+		enemiesKilled = num; //setting the number to enemieskilled
 	}
 
+	//======================================================
+	// function name: getLevel()
+	// parameters: none
+	// return type: int num, return the integer level
+	//======================================================
 	int getLevel()
 	{
-		return level;
+		return level; //return the level
 	}
-
+	
+	//======================================================
+	// function name: setLevel()
+	// parameters: int num, passing a number
+	// return type: none, void
+	//======================================================
 	void setLevel(int num)
 	{
 		level = num;
 	}
 
+	//======================================================
+	// function name: getDropRate()
+	// parameters: none
+	// return type: int, retruns the number of frames
+	//======================================================
 	int getDropRate()
 	{
-		return dropRate;
+		return dropRate; //return the drop rate
 	}
-
+	
+	//======================================================
+	// function name: setDropRate()
+	// parameters: int, sets the number of frames
+	// return type: none
+	//======================================================
 	void setDropRate(int num)
 	{
 		dropRate = num;
 	}
 	
-	//to check if the game has started
+	//======================================================
+	// function name: getGameStarted
+	// parameters: none
+	// return type: bool, will return true if the game is started
+	//======================================================
 	bool getGameStarted()
 	{
-		return isGameStarted;
+		return isGameStarted; //return if the game is started
 	}
-
+	
+	//======================================================
+	// function name: setGameStarted
+	// parameters: bool, we pass a bool to set the game started
+	// return type: none
+	//======================================================
 	void setGameStarted(bool x)
 	{
 		isGameStarted = x;
 	}
-
+	//======================================================
+	// function name: setLives
+	// parameters: int num, to reset lives
+	// return type: none, void
+	//======================================================
 	void setLives(int num)
 	{
-		lives = num;
+		lives = num; //set the lives equal to num
 
 	}
 

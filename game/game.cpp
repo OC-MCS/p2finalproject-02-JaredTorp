@@ -1,9 +1,10 @@
-//=========================================================
-// This is just the starting point for your final project.
-// You are expected to modify and add classes/files as needed.
-// The code below is the original code for our first graphics
-// project (moving the little green ship). 
-//========================================================
+
+//============================================================
+// Jared Torp
+// Final project, Space invaders
+// Due April 19, 2019
+//============================================================
+
 
 #include <iostream>
 using namespace std;
@@ -22,18 +23,6 @@ using namespace sf;
 
 void ResetGame(EnemyList& Enemies, MissileList& Missiles, BombList& Bombs, GameSettings& Settings); //prototype
 
-//============================================================
-// Jared Torp
-// Final project, Space invaders
-// Due April 19, 2019
-//============================================================
-
-// note: a Sprite represents an image on screen. A sprite knows and remembers its own position
-// ship.move(offsetX, offsetY) adds offsetX, offsetY to 
-// the current position of the ship. 
-// x is horizontal, y is vertical. 
-// 0,0 is in the UPPER LEFT of the screen, y increases DOWN the screen
-
 
 
 int main()
@@ -47,12 +36,12 @@ int main()
 
 
 	//creating the GameUI object 
-	GameUI GameUI;
+	GameUI GameUI; //define a GameUI object
 	Ship Ship(window);//creates the ship object and passes the window
-	GameSettings Settings;
-	EnemyList Enemies;
-	MissileList Missiles;
-	BombList Bombs;
+	GameSettings Settings; //Create a settings object
+	EnemyList Enemies; //EnemyList object 
+	MissileList Missiles; //MissileList Object
+	BombList Bombs; //List of Bomb Object
 
 
 	int frameCounter = 0; //counter to count the frames, so we can keep track of every second, 60fps
@@ -94,14 +83,14 @@ int main()
 			{
 				//check to see if the Start button was pressed
 				Vector2f mousePos = window.mapPixelToCoords(Mouse::getPosition(window));
-				GameUI.handleMouseUp(mousePos, Settings); //checks the position of the moust to click the start
+				GameUI.handleMouseUp(mousePos, Settings); //checks the position of the mouse to click the start
 			
 			}
 			else if (event.type == Event::KeyPressed)
 			{
 				if (event.key.code == Keyboard::Space)
 				{
-					Missiles.addMissile(Ship.getShipPosition());
+					Missiles.addMissile(Ship.getShipPosition()); //shoots a missile when the space is pressed
 
 				}
 
@@ -113,12 +102,12 @@ int main()
 
 
 
-			//the game hasnt started
+			//This if statement displays the start screen, and the game has not started
 			if (Settings.getGameStarted() ==  false)
 			{
 
-				window.draw(background);
-				GameUI.drawStart(window);
+				window.draw(background); //draw the background
+				GameUI.drawStart(window); //draw the start box
 				if (gameWon)
 				{
 					GameUI.drawWinner(window); //draws the text of the player winning
@@ -131,15 +120,10 @@ int main()
 			}
 
 			//the game starts here, the level should be at level one
-			//figure out how to resart the game WITHOUT going into a whole different While loop
-
 			else if (Settings.getGameStarted() == true) // The game has started
 			{
-				
-
-
-
-				//texture for the stars background
+		
+				//Draws the stars background
 				window.draw(background);
 
 				//draw the games
@@ -163,7 +147,7 @@ int main()
 				//do game1 bomb
 				if (frameCounter == Settings.getDropRate())
 				{
-					Enemies.DropBomb(Bombs);
+					Enemies.DropBomb(Bombs); //drops a bomb every drop rate, depending on level one or two
 					frameCounter = 0;
 				}
 
@@ -172,7 +156,7 @@ int main()
 				
 				//sets the bool to true or false, whether or not the player has been hit by a bomb
 				PlayerHit = Bombs.CheckHitPlayer(Ship); //we need to check if the bomb hits the player, so we pass the ship
-
+				//set player hit equal to the function
 
 				//we need to check to see if any of the enemies passes the Y value
 				if (Enemies.enemyTooLow() == true || PlayerHit)
@@ -187,8 +171,8 @@ int main()
 				//check to see if all the enemies have been killed!
 				if (Enemies.getEnemyList().size() == 0 && Settings.getLevel() == 1)
 				{
-					//set the level to two
-					Settings.setLevel(2); 
+					
+					Settings.setLevel(2); //set the level to two
 					Missiles.DeleteList(); //because we dont want to accidentally shoot the level 2 enemies
 					Bombs.DeleteList(); //we dont want the bombs to stay
 					Enemies.createEnemies(Settings.getLevel()); //recreate the enemies
@@ -198,7 +182,7 @@ int main()
 
 				}
 
-				//Level 2 checks to see if the game is over
+				//Level 2 checks to see if the game is won
 				if (Enemies.getEnemyList().size() == 0 && Settings.getLevel() == 2)
 				{
 					//resetting the game
@@ -227,24 +211,12 @@ int main()
 
 
 			}
-			
-			
-			//would I do another while loop? I might just adjust the settings, recreate the enemies, and start again
-			//Level 2 
-			
-
 
 		// end the current frame; this makes everything that we have 
 		// already "drawn" actually show up on the screen
 			window.display();
-
+			//increment the frame counter
 			frameCounter++; //to count the frames, will count 60 a second
-
-
-
-		
-
-		
 	}
 
 	
@@ -252,7 +224,16 @@ int main()
 	return 0;
 }
 
-//function to reset the game
+
+//======================================================
+// function name: ResetGame
+// parameters: 
+// EnemyList& Enemies- pass the EnemyList Object
+// MissileList& Missiles- pass the MissileList Object
+// BombList& Bombs- pass the BombList Object
+// GameSettings& Settings- pass the GameSettings Object
+// return type: none, its a void
+//======================================================
 void ResetGame(EnemyList& Enemies, MissileList& Missiles, BombList& Bombs, GameSettings& Settings)
 {
 	Enemies.DeleteList(); //delete all the enemies

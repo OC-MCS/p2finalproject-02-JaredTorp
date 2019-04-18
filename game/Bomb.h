@@ -10,51 +10,53 @@ using namespace sf;
 class Bomb
 {
 private:
-	Sprite bomb;
-
-	int movement;
+	Sprite bomb; //bomb's sprite
+	float movement; //an int that keeps track of the movement
 
 
 public:
 	
-	//overloaded constructor
+	//======================================================
+	// function name: Bomb()
+	// parameters: Texture& bombTexture- we pass the texture of the bomb by reference
+	// return type: none, its a constructor
+	//======================================================
 	Bomb(Texture& bombTexture, Vector2f pos)
 	{
-		bomb.setTexture(bombTexture);
-		bomb.setPosition(pos);
-		movement = 5;
+		bomb.setTexture(bombTexture); //sets the texture
+		bomb.setPosition(pos); //sets the bomb's position
+		movement = 6; //movement of the bomb is 6
 	}
 
-	//drawing the bomb WHEN we drop one
-	void dropBomb(RenderWindow& win)
-	{
-		
-		win.draw(bomb); //draw the bomb
-
-	}
-
-	//to check to see if the bomb hit the player
+	//======================================================
+	// function name: Bomb()
+	// parameters: Texture& bombTexture- we pass the texture of the bomb by reference
+	// return type: none, its a constructor
+	//======================================================
 	FloatRect getBombBounds()
 	{
 		return bomb.getGlobalBounds();
 	}
 
-	//get the y position of the bomb for deleting offscreen on the below
-	int getBombYPos()
+	//======================================================
+	// function name: getBombYPos()
+	// parameters:none
+	// return type: int, we want the Y position
+	//======================================================
+	float getBombYPos()
 	{
-		return bomb.getPosition().y;
+		return bomb.getPosition().y; //return the y position
 	}
 
-	//draw the bomb
+	//======================================================
+	// function name: draw()
+	// parameters: RenderWindow& Window- pass the window to draw
+	// return type: none, its a void
+	//======================================================
 	void draw(RenderWindow& win)
 	{
 		bomb.move(0, movement); //move the bomb
-		win.draw(bomb);
-	}
-
-	void setBombMovement(int num)
-	{
-		movement = num;
+		win.draw(bomb); //draw the bomb
 	}
 
 
