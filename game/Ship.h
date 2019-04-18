@@ -104,4 +104,13 @@ public:
 		return ship.getPosition(); //returns the position
 	}
 	
+	//======================================================
+	// function name: ResetShipPos
+	// parameters: none
+	// return type: Vector2f, returns the position
+	//======================================================
+	void ResetShipPos()
+	{
+		ship.setPosition(shipX, shipY); //set the starting position
+	}
 };

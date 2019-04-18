@@ -21,7 +21,7 @@ using namespace std;
 using namespace sf; 
 
 
-void ResetGame(EnemyList& Enemies, MissileList& Missiles, BombList& Bombs, GameSettings& Settings); //prototype
+void ResetGame(EnemyList& Enemies, MissileList& Missiles, BombList& Bombs, GameSettings& Settings, Ship& Ship); //prototype
 
 
 
@@ -161,6 +161,7 @@ int main()
 				//we need to check to see if any of the enemies passes the Y value
 				if (Enemies.enemyTooLow() == true || PlayerHit)
 				{
+					Ship.ResetShipPos(); //reset the ship position
 					Settings.LoseLife(); //need to lose a life
 					Enemies.resetEnemyPositions(); //need to reset the enemies positions back to the top
 					Bombs.DeleteList(); //we dont want the bombs to stay
@@ -171,7 +172,7 @@ int main()
 				//check to see if all the enemies have been killed!
 				if (Enemies.getEnemyList().size() == 0 && Settings.getLevel() == 1)
 				{
-					
+					Ship.ResetShipPos(); //reset the ship position
 					Settings.setLevel(2); //set the level to two
 					Missiles.DeleteList(); //because we dont want to accidentally shoot the level 2 enemies
 					Bombs.DeleteList(); //we dont want the bombs to stay
@@ -186,7 +187,7 @@ int main()
 				if (Enemies.getEnemyList().size() == 0 && Settings.getLevel() == 2)
 				{
 					//resetting the game
-					ResetGame(Enemies, Missiles, Bombs, Settings); //func call to reset the game
+					ResetGame(Enemies, Missiles, Bombs, Settings, Ship); //func call to reset the game
 					frameCounter = 0; //reset the frame counter
 					Settings.setGameStarted(false); //the game is now NOT started
 					gameWon = true; //game was  won
@@ -199,7 +200,7 @@ int main()
 				if (Settings.getLives() == 0)
 				{
 					//resetting the game
-					ResetGame(Enemies, Missiles, Bombs, Settings); //func call to reset the game
+					ResetGame(Enemies, Missiles, Bombs, Settings, Ship); //func call to reset the game
 					frameCounter = 0; //reset the frame counter
 					Settings.setGameStarted(false); //the game is now NOT started
 					gameWon = false; //game was not won
@@ -234,8 +235,9 @@ int main()
 // GameSettings& Settings- pass the GameSettings Object
 // return type: none, its a void
 //======================================================
-void ResetGame(EnemyList& Enemies, MissileList& Missiles, BombList& Bombs, GameSettings& Settings)
+void ResetGame(EnemyList& Enemies, MissileList& Missiles, BombList& Bombs, GameSettings& Settings, Ship& ship)
 {
+	ship.ResetShipPos(); //reset the ship position
 	Enemies.DeleteList(); //delete all the enemies
 	Missiles.DeleteList(); //delete all the Missiles
 	Bombs.DeleteList(); //delete all the bombs
